@@ -125,6 +125,8 @@ venv.bak/
 
 .vscode
 
+WHERE AM I.md
+
 # mypy
 .mypy_cache/
 .dmypy.json
