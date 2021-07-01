@@ -4,7 +4,14 @@
 Nue Blog - {{ post.title }}
 {% endblock title %}
 
+
+
 {% block content %}
+<style>
+    .children div {
+        padding-left: 10px;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-md-center pt-5">
         <div class="col-md-8">
@@ -24,13 +31,22 @@ Nue Blog - {{ post.title }}
                 </h2>
                 {% endwith total_comments %}
 
-                {% for comment in comments  %}
-                Comment {{ forloop.counter }} by {{ comment.name }}
-                on {{ comment.publish }}
-                {{ comment.content|linebreaks }}
-                {% empty %}
-                <p>There are no comments for this post!</p>
-                {% endfor %}
+                {% load mptt_tags %}
+
+                <div>
+                    {% recursetree comments %}
+                    <div>{{ node.content }}</div>
+                    <div>{{ node.level }}</div>
+                    {% if not node.is_leaf_node %}
+                    
+                    <div class="children ml-5 pl-md-5">
+                        {{ children }}
+                    </div>
+                    {% endif %}
+                    {% endrecursetree %}
+                </div>
+
+
                 <h2>Make a new comment</h2>
                 <form method="POST" id="myForm">
                     {{ comment_form.as_p }}

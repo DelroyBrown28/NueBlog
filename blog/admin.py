@@ -1,6 +1,7 @@
 from django.contrib import admin
 from . import models
 from .models import Post, Comment
+from mptt.admin import MPTTModelAdmin
 
 
 @admin.register(models.Post)
@@ -10,10 +11,7 @@ class AuthorAdmin(admin.ModelAdmin):
         "slug" : ("title",),
     }
     
-@admin.register(models.Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'name', 'email', 'publish', 'status')
-    list_filter = ('publish', 'status')
-    search_fields = ('name', 'email', 'content')
+
     
 admin.site.register(models.Category)
+admin.site.register(models.Comment, MPTTModelAdmin)
