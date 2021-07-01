@@ -5,7 +5,7 @@ from .models import Post, Comment
 
 @admin.register(models.Post)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'author', 'slug')
+    list_display = ('title', 'id', 'status', 'author', 'slug')
     prepopulated_fields = {
         "slug" : ("title",),
     }
