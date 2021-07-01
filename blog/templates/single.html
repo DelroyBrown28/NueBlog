@@ -16,6 +16,29 @@ Nue Blog - {{ post.title }}
                 <p>{{ post.content|linebreaks }}</p>
             </div>
 
+            <div class="col-md-12">
+
+                {% with comments.count as total_comments  %}
+                <h2>
+                    {{ total_comments }} comment{{ total_comments|pluralize }}
+                </h2>
+                {% endwith total_comments %}
+
+                {% for comment in comments  %}
+                Comment {{ forloop.counter }} by {{ comment.name }}
+                on {{ comment.publish }}
+                {{ comment.content|linebreaks }}
+                {% empty %}
+                <p>There are no comments for this post!</p>
+                {% endfor %}
+                <h2>Make a new comment</h2>
+                <form method="POST" id="myForm">
+                    {{ comment_form.as_p }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
