@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
-from .models import Post
+from .models import Post, Comment, Category
 from .forms import NewCommentForm
 from django.views.generic import ListView
 
@@ -45,4 +45,10 @@ class CategoryListView(ListView):
         return content
     
     
-                
+def category_list(request):
+    category_list = Category.objects.exclude(name='default')
+    context = {
+        'category_list' : category_list,
+    }
+    return context
+               
