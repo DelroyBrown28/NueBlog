@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     # MY STUFF
     
     'blog',
+    'accounts',
     'mptt',
 ]
 
@@ -40,7 +41,7 @@ ROOT_URLCONF = 'NueBlog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

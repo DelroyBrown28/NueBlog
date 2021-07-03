@@ -88,7 +88,6 @@ def post_search(request):
             return JsonResponse({'search_string': data})
     
     
-    
     if 'q' in request.GET:
         form = PostSearchForm(request.GET)
         if form.is_valid():
