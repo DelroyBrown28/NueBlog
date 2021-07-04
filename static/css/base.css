@@ -12,6 +12,14 @@ LITTLE HELPERS
     border: 1px solid blue;
 }
 
+
+
+.flexed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 a:hover {
     text-decoration: none !important;
 }
@@ -21,6 +29,13 @@ a:hover {
 body,
 html {
     font-family: 'Roboto', sans-serif;
+}
+
+@media (min-width: 1200px) {
+
+    .container {
+        max-width: 1500px;
+    }
 }
 
 /* 
@@ -52,6 +67,27 @@ JUMBOTRON
     border-radius: 0;
 }
 
+/* POST DISPLAY JUMBOTRON */
+.post-display-jumbotron {
+    height: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+/* POST DISPLAY JUMBOTRON */
+
+.about-link,
+.contact-link {
+    color: #222;
+    font-weight: 600;
+
+}
+
+.about-link:hover,
+.contact-link:hover {
+    transition: 0.3s;
+    color: #48AA8B;
+}
 
 /* 
 ======
@@ -207,6 +243,7 @@ BUTTONS
     position: relative;
     display: flex;
     flex-direction: column;
+    width: 345px;
     min-width: 0;
     word-wrap: break-word;
     background-color: #fff;
@@ -243,4 +280,16 @@ BUTTONS
 
 .post-author {
     padding-right: 16px;
+}
+
+
+/* 
+=================
+POST DISPLAY PAGE
+=================
+*/
+
+.post-title {
+    text-transform: uppercase;
+    font-weight: 300;
 }

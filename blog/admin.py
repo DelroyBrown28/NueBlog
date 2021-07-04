@@ -6,7 +6,8 @@ from mptt.admin import MPTTModelAdmin
 
 @admin.register(models.Post)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id', 'status', 'author', 'slug')
+    list_display = ('title', 'category', 'id', 'status', 'author', 'slug')
+    list_editable = ('status', 'category')
     prepopulated_fields = {
         "slug" : ("title",),
     }
