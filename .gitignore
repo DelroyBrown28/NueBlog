@@ -126,6 +126,8 @@ venv.bak/
 .vscode
 
 WHERE AM I.md
+bootstrap.css
+bootstrap4.css
 
 # mypy
 .mypy_cache/

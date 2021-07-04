@@ -12,7 +12,7 @@ def home(request):
     
     all_posts = Post.newmanager.all()
     
-    return render(request, 'index.html', {'posts' : all_posts})
+    return render(request, 'blog/index.html', {'posts' : all_posts})
 
 def post_single(request, post):
     post = get_object_or_404(Post, slug=post, status='published')
@@ -38,7 +38,7 @@ def post_single(request, post):
             return HttpResponseRedirect('/' + post.slug)
     else:
         comment_form = NewCommentForm()
-    return render(request, 'single.html', {
+    return render(request, 'blog/single.html', {
         'post' : post, 
         'comments' : user_comment, 
         'comments' : comments, 
@@ -48,7 +48,7 @@ def post_single(request, post):
             
 
 class CategoryListView(ListView):
-    template_name = 'category.html'
+    template_name = 'blog/category.html'
     context_object_name = 'categorylist'
     
     def get_queryset(self):
@@ -100,7 +100,7 @@ def post_search(request):
                 query &= Q(title__contains=q)
             results = Post.objects.filter(query)
     
-    return render(request, 'search.html', {
+    return render(request, 'blog/search.html', {
         'form' : form,
         'q' : q,
         'results' : results,})
