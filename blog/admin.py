@@ -8,6 +8,7 @@ from mptt.admin import MPTTModelAdmin
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'id', 'status', 'author', 'slug')
     list_editable = ('status', 'category')
+    summernote_fields = ('content',)
     prepopulated_fields = {
         "slug" : ("title",),
     }

@@ -28,8 +28,11 @@
 
 <body>
 
-    {% include 'includes/navbar.html' %}
 
+    {% if request.get_full_path == '/account/login/' %}
+    {% else %}
+    {% include 'includes/navbar.html' %}
+    {% endif %}
 
     {% block content %}
 

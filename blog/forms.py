@@ -3,6 +3,7 @@ from .models import Comment, Category
 from mptt.forms import TreeNodeChoiceField
 
 
+
 class NewCommentForm(forms.ModelForm):
     parent = TreeNodeChoiceField(queryset=Comment.objects.all())
     
@@ -21,7 +22,7 @@ class NewCommentForm(forms.ModelForm):
         widgets = {
             'name' : forms.TextInput(attrs={'class' : 'col-sm-12'}),
             'email' : forms.TextInput(attrs={'class' : 'col-sm-12'}),
-            'content' : forms.Textarea(attrs={'class' : 'form-control'}),
+            'content' : forms.TextInput(attrs={'class' : 'form-control'}),
         }
 
 

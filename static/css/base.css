@@ -74,6 +74,7 @@ JUMBOTRON
     background-position: center;
     background-size: cover;
 }
+
 /* POST DISPLAY JUMBOTRON */
 
 .about-link,
@@ -251,8 +252,6 @@ BUTTONS
     border: none;
     border-radius: 0;
     border-bottom: 5px solid #222;
-
-
 
 }
 
