@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.exceptions import ValidationError
 
 
 class UserLoginForm(AuthenticationForm):
@@ -19,7 +20,7 @@ class UserLoginForm(AuthenticationForm):
     
 class RegistrationForm(forms.ModelForm):
     username = forms.CharField(label='Enter Username', min_length=4, max_length=40, help_text='Required')
-    email = forms.EmailInput(max_length=100, help_text='Required', error_messages={
+    email = forms.EmailField(max_length=100, help_text='Required', error_messages={
         'required' : 'Sorry, you must enter an email address to register'})
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     repeat_password = forms.CharField(label='Password', widget=forms.PasswordInput)
