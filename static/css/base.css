@@ -293,3 +293,19 @@ POST DISPLAY PAGE
     text-transform: uppercase;
     font-weight: 300;
 }
+
+.post-content {
+    border-top: 5px solid #222;
+    border-bottom: 5px solid #222;
+}
+
+/* COMMENT BOX */
+
+.comment-box {
+    border-left: 2px solid #48AA8B;
+}
+
+.comment-box-name {
+    text-transform: uppercase;
+    font-weight: 500;
+}

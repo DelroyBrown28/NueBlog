@@ -1,5 +1,6 @@
 {% extends "base/base.html" %}
 {% load static %}
+{% include 'django_quill/media.html' %}
 
 {% block title %}
 {{post.title}}
@@ -37,27 +38,24 @@
             <h1 class="post-title my-3"><i class="fas fa-angle-double-right mr-3" style="color: #48AA8B;"></i>{{post.title}}</h1>
             <small>By: {{post.author}}</small>
         </div>
-        <div class="col-md-9 album bg-light">
+        <div class="col-md-9 post-content album bg-light mt-5">
             <p>{{post.content|linebreaks}}</p>
         </div>
-
-        <div class="col-md-9 mt-5">
-
+     
+        <div class="col-md-9 my-5 bg-light">
             {% with allcomments.count as total_comments %}
-            <h2>
-                {{ total_comments }} comment{{ total_comments|pluralize }}
-            </h2>
+                <small>{{ total_comments }} comment{{ total_comments|pluralize }}</small>
             {% endwith %}
 
             {% load mptt_tags %}
-
             <div>
                 {% recursetree comments %}
-                <div id="{{ node.id }}" class="my-2 p-2" style="border: 1px solid grey">
-                    <div class="d-flex justify-content-between">By {{ node.name }}<div></div>{{ node.publish }}</div>
+                <div id="{{ node.id }}" class="my-5 comment-box pl-3">
+                    <div class="d-flex justify-content-between comment-box-name mb-2">{{ node.name }}<div>
+
+                    </div>{{ node.publish }}</div>
                     <div>{{ node.content }}</div>
-                    <hr />
-                    <button class="button" onclick="myFunction({{ node.id }})">Reply</button>
+                    <button class="button btn mt-5" onclick="myFunction({{ node.id }})">Reply</button>
                 </div>
                 {% if not node.is_leaf_node %}
                 <div
@@ -101,10 +99,10 @@
 
             <div id="myDIV" style="display:block;">
                 <form id="myForm" method="post">
-                    <h2>Create new comment</h2>
+                    <h2 style="text-transform: uppercase; font-weight: 300;">Create new comment</h2>
                     {{ comment_form.as_p }}
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                    <button type="submit" class="btn btn-lg btn-block">Submit</button>
                 </form>
             </div>
 

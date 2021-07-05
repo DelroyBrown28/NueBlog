@@ -5,6 +5,7 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
 
+
 def user_directory_path(instance, filename):
     return 'posts/{0}/{1}'.format(instance.title, filename)
 
@@ -65,7 +66,7 @@ class Comment(MPTTModel):
     status = models.BooleanField(default=True)
     
     class MPTTMeta:
-        order_insertion_by = ['publish']
+        order_insertion_by = ['-publish']
         
     def __str__(self):
-        return f"Comment by {self.name}"
+        return f"Comment by {self.name} on {self.post}"
