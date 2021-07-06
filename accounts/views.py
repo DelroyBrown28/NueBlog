@@ -8,8 +8,32 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from .forms import RegistrationForm
+from .forms import RegistrationForm, UserEditForm
 from .tokens import account_activation_token
+
+
+@login_required
+def delete_user(request):
+    if request.method == 'POST':
+        user = User.objects.get(username=request.user)
+        user.is_active = False
+        user.save()
+        return redirect('blog:homepage')
+    return render(request, 'accounts/delete.html')
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user,
+                                 data=request.POST)
+        if user_form.is_valid():
+            user_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+    return render(request,
+                  'accounts/update.html',
+                  {'user_form' : user_form,})
 
 
 @login_required
