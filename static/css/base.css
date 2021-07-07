@@ -249,15 +249,18 @@ BUTTONS
     border-radius: 0px;
 }
 
-.post-image {
-    filter: brightness(50%);
-}
+/* .post-image {
+    filter: brightness(90%);
+} */
 
 .card-body {
     flex: 1 1 auto;
     padding: 1rem 1rem;
     background: #FFF;
     height: 205px;
+
+    
+
 }
 
 .card {
@@ -270,26 +273,27 @@ BUTTONS
     background-color: #fff;
     background-clip: border-box;
     border: none;
-    border-radius: 0;
-    border-bottom: 5px solid #222;
+    border-left: 3px solid #48AA8B;
+    border-right: 3px solid #48AA8B;
 
 }
 
 .card:hover {
-    transition: box-shadow 0.3s ease-in-out;
-    -webkit-border-radius: 0px;
-    border-radius: 0px;
-    background: #ffffff;
-    -webkit-box-shadow: 27px 27px 8px #48AA8B,
-        -27px -27px 8px #ffffff;
-    box-shadow: 27px 27px 8px #48AA8B,
-        -27px -27px 8px #ffffff;
+    transition: 0.3s ease-in-out;
+    transform: translateY(-5px);
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.011),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.016),
+        0 12.5px 10px rgba(0, 0, 0, 0.02),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.024),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.029),
+        0 100px 80px rgba(0, 0, 0, 0.04);
 }
 
-.card:hover>.post-image {
+/* .card:hover>.post-image {
     transition: 0.3s ease-in-out;
     filter: brightness(100%);
-}
+} */
 
 
 
