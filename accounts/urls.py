@@ -20,6 +20,8 @@ urlpatterns = [
         form_class=PwdResetConfirmForm), name="pwdresetconfirm"),
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit, name='edit'),
+    path('fav/<int:id>', views.favorites_add, name='favorites_add'),
+    path('profile/favorites', views.favorites_list, name='favorites_list'),
     path('profile/delete/', views.delete_user, name='deleteuser'),
     path('register/', views.accounts_register, name='register'),
     path('activate/<slug:uidb64>/<slug:token>', views.activate, name='activate'),

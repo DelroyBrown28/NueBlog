@@ -259,8 +259,6 @@ BUTTONS
     background: #FFF;
     height: 205px;
 
-    
-
 }
 
 .card {
@@ -273,13 +271,14 @@ BUTTONS
     background-color: #fff;
     background-clip: border-box;
     border: none;
+    transition: 0.3s ease-out !important;
+
     border-left: 3px solid #48AA8B;
     border-right: 3px solid #48AA8B;
 
 }
 
 .card:hover {
-    transition: 0.3s ease-in-out;
     transform: translateY(-5px);
     box-shadow:
         0 2.8px 2.2px rgba(0, 0, 0, 0.011),

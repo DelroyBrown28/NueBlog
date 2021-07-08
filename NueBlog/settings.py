@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'blog',
     'accounts',
     'mptt',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [

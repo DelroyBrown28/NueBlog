@@ -12,6 +12,7 @@
     .children {
         padding-left: 48px;
     }
+
     .children2 {
         padding-left: 0px;
     }
@@ -35,16 +36,38 @@
 
         <div class="col-md-9"><img class="img-fluid" src="{{post.image.url}}" alt="{{ post.title }}"></div>
         <div class="col-md-9">
-            <h1 class="post-title my-3"><i class="fas fa-angle-double-right mr-3" style="color: #48AA8B;"></i>{{post.title}}</h1>
-            <small>By: {{post.author}}</small>
+            <h1 class="post-title my-3">
+                <i class="fas fa-angle-double-right mr-3" style="color: #48AA8B;"></i>
+                {{post.title}}
+                {% if request.user.is_authenticated %}
+                {% if fav %}
+                <div>
+                    <a class="btn" href="{% url 'accounts:favorites_add' post.id %}">Remove From Favorites</a>
+                </div>
+                {% else %}
+                <div>
+                    <a class="btn" href="{% url 'accounts:favorites_add' post.id %}">Add To Favorites</a>
+                </div>
+                {% endif %}
+                {% else %}
+                <div>
+                    <a class="btn" href="{% url 'accounts:register' %}">REGISTER</a>
+                </div>
+               
+                {% endif %}
+
+
+            </h1>
+            <small>By: {{post.author}}</small><br>
+
         </div>
         <div class="col-md-9 post-content album bg-light mt-5">
             <p>{{post.content|linebreaks}}</p>
         </div>
-     
+
         <div class="col-md-9 my-5 bg-light">
             {% with allcomments.count as total_comments %}
-                <small>{{ total_comments }} comment{{ total_comments|pluralize }}</small>
+            <small>{{ total_comments }} comment{{ total_comments|pluralize }}</small>
             {% endwith %}
 
             {% load mptt_tags %}
@@ -53,7 +76,7 @@
                 <div id="{{ node.id }}" class="my-5 comment-box pl-3">
                     <div class="d-flex justify-content-between comment-box-name mb-2">{{ node.name }}<div>
 
-                    </div>{{ node.publish }}</div>
+                        </div>{{ node.publish }}</div>
                     <div>{{ node.content }}</div>
                     <button class="button btn mt-5" onclick="myFunction({{ node.id }})">Reply</button>
                 </div>

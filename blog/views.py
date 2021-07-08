@@ -16,6 +16,12 @@ def home(request):
 
 def post_single(request, post):
     post = get_object_or_404(Post, slug=post, status='published')
+    fav = bool
+    
+    if post.favorites.filter(id=request.user.id).exists():
+        fav = True
+    
+    
     allcomments = post.comments.filter(status=True)
     page = request.GET.get('page', 1)
     paginator = Paginator(allcomments, 100)
@@ -44,6 +50,7 @@ def post_single(request, post):
         'comments' : comments, 
         'comment_form' : comment_form,
         'allcomments' : allcomments,
+        'fav' : fav,
         })
             
 

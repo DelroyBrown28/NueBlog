@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
@@ -11,6 +11,28 @@ from django.contrib.auth.models import User
 from .forms import RegistrationForm, UserEditForm, UserProfileForm
 from .tokens import account_activation_token
 from .models import Profile
+from blog.models import Post
+
+
+
+@login_required
+def favorites_list(request):
+    new = Post.newmanager.filter(favorites=request.user)
+    return render(request,
+                  'accounts/favorites.html',
+                  {'new' : new})
+
+
+
+@login_required
+def favorites_add(request, id):
+    post = get_object_or_404(Post, id=id)
+    if post.favorites.filter(id=request.user.id).exists():
+        post.favorites.remove(request.user)
+    else:
+        post.favorites.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    
 
 
 def avatar(request):
@@ -100,5 +122,4 @@ def activate(request, uidb64, token):
         return redirect('login')
     else:
         return render(request, 'registration/activation_invalid.html')
-        
-        
+
