@@ -13,6 +13,11 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
+    # JET
+    'jet.dashboard',
+    'jet',
+    
+    # DJANGO
     'django.contrib.admin',
     'django_quill',
     'django.contrib.auth',
@@ -38,6 +43,8 @@ MIDDLEWARE = [
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+JET_SIDE_MENU_COMPACT = True
 
 ROOT_URLCONF = 'NueBlog.urls'
 
