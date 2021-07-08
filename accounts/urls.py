@@ -21,6 +21,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit, name='edit'),
     path('fav/<int:id>', views.favorites_add, name='favorites_add'),
+    path('like', views.like, name='like'),
     path('profile/favorites', views.favorites_list, name='favorites_list'),
     path('profile/delete/', views.delete_user, name='deleteuser'),
     path('register/', views.accounts_register, name='register'),

@@ -259,6 +259,7 @@ BUTTONS
     background: #FFF;
     height: 205px;
 
+
 }
 
 .card {
@@ -271,10 +272,10 @@ BUTTONS
     background-color: #fff;
     background-clip: border-box;
     border: none;
-    transition: 0.3s ease-out !important;
+    transition: 0.3s ease-out;
 
-    border-left: 3px solid #48AA8B;
-    border-right: 3px solid #48AA8B;
+    border-top: 3px solid #222;
+    border-bottom: 3px solid #222;
 
 }
 
@@ -288,12 +289,6 @@ BUTTONS
         0 41.8px 33.4px rgba(0, 0, 0, 0.029),
         0 100px 80px rgba(0, 0, 0, 0.04);
 }
-
-/* .card:hover>.post-image {
-    transition: 0.3s ease-in-out;
-    filter: brightness(100%);
-} */
-
 
 
 .post-published-date {
@@ -310,6 +305,8 @@ BUTTONS
 POST DISPLAY PAGE
 =================
 */
+
+
 
 .post-title {
     text-transform: uppercase;
@@ -330,4 +327,27 @@ POST DISPLAY PAGE
 .comment-box-name {
     text-transform: uppercase;
     font-weight: 500;
+}
+
+/* 
+===================
+FAVORITE POSTS PAGE
+===================
+*/
+
+.remove-section {
+    width: 100%;
+    padding-left: 16px;
+    text-align: right;
+
+
+}
+.remove-post-button {
+    width: 100%;
+    color: #000;
+    font-size: 20px;
+}
+
+.remove-post-button:hover {
+    color: #48AA8B;
 }
