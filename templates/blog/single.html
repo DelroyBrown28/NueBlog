@@ -58,7 +58,7 @@
 <div class="container">
     <div class="row justify-content-md-center pt-5">
 
-        <div class="col-md-9 d-flex justify-content-between">
+        <div class="col-md-12 d-flex justify-content-between">
             <div class="d-flex">
                 <div>
                     <img class="avatar_single" src="{{ post.author.profile.avatar.url }}">
@@ -109,8 +109,8 @@
                 {% else %}
                 <div class="pr-2">
                     <span class="" id="like_count">{{ post.like_count }}</span>
-                    <a href="{% url 'accounts:register' %}"
-                        class="btn-link text-dark p-0 border-0 btn-outline-light" value="{{post.id}}">
+                    <a href="{% url 'accounts:register' %}" class="btn-link text-dark p-0 border-0 btn-outline-light"
+                        value="{{post.id}}">
                         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -131,128 +131,150 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-md-9 pt-3">
+        <div class="col-md-12 pt-3">
             <div class="col-12 p-0">
                 <img class="img-fluid" style="width: 100%;" src="{{post.image.url}}" alt="{{ post.title }}">
             </div>
             <div class="col-12 p-0 my-3 d-flex justify-content-between">
                 <h1 class="post-title">{{post.title}}</h1>
             </div>
-            <div class="col-12 post-content album bg-light mt-5">
+            <div class="col-12 post-content mt-5">
                 <p>{{post.content|linebreaks}}</p>
             </div>
         </div>
-        <div class="col-md-9">
-            {% with allcomments.count as total_comments %}
-            <h2>
-                {{ total_comments }} comment{{ total_comments|pluralize }}
-            </h2>
-            {% endwith %}
-            {% load mptt_tags %}
-            <div>
-                {% recursetree comments %}
-                <div id="{{ node.id }}" class="my-5 comment-box pl-3">
-                    <div class="d-flex justify-content-between comment-box-name mb-2">{{ node.name }}<div>
 
-                        </div>{{ node.publish }}</div>
-                    <div>{{ node.content }}</div>
-                    <button class="button btn mt-5" onclick="myFunction({{ node.id }})">Reply</button>
+        
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content p-5">
+                    <div class="col-md-12">
+
+                        {% load mptt_tags %}
+
+                        <nav aria-label="Page navigation example">
+                            {% if comments.has_other_pages %}
+                            <ul class="pagination">
+                                {% if comments.has_previous %}
+                                <li class="page-item"><a class="page-link"
+                                        href="?page={{ comments.previous_page_number }}">Previous</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                {% endif %}
+                                {% for num in comments.paginator.page_range %}
+                                {% if comments.number == l %}
+                                <li class="page-item active"><span class="page-link">{{ num }} <span
+                                            class="sr-only">(current)</span></span>
+                                </li>
+                                {% else %}
+                                <li><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if comments.has_next %}
+                                <li class="page-item"><a class="page-link"
+                                        href="?page={{ comments.next_page_number }}">Next</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                {% endif %}
+                            </ul>
+                            {% endif %}
+                        </nav>
+
+                        <form id="myForm" class="comment-form" method="post">
+                            <h2 style="font-weight: 300;">PLEASE LEAVE YOUR THOUGHTS</h2>
+                            {{ comment_form.as_p }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                {% if not node.is_leaf_node %}
-                <div
-                    class="{% if node.level < 3 %} children pl-2 pl-md-5 {% else %} children children2 pl-2 pl-md-5 {% endif %}">
-                    {{ children }}
-                </div>
-                {% endif %}
-                {% endrecursetree %}
             </div>
-            <nav aria-label="Page navigation example">
-                {% if comments.has_other_pages %}
-                <ul class="pagination">
-                    {% if comments.has_previous %}
-                    <li class="page-item"><a class="page-link"
-                            href="?page={{ comments.previous_page_number }}">Previous</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    {% endif %}
-                    {% for num in comments.paginator.page_range %}
-                    {% if comments.number == l %}
-                    <li class="page-item active"><span class="page-link">{{ num }} <span
-                                class="sr-only">(current)</span></span>
-                    </li>
-                    {% else %}
-                    <li><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if comments.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ comments.next_page_number }}">Next</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                    {% endif %}
-                </ul>
-                {% endif %}
-            </nav>
-            <form id="myForm" method="post">
-                <h2>Create new comment</h2>
-                {{ comment_form.as_p }}
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-            </form>
         </div>
+      
+      <!-- Comments -->
+        <div class="comments-section mt-5">
+            {% with allcomments.count as total_comments %}
+            <small style="font-weight: 300;">
+                {{ total_comments }} comment{{ total_comments|pluralize }}
+            </small>
+            {% endwith %}
+            {% recursetree comments %}
+            <div id="{{ node.id }}" class="my-5 comment-box pl-3">
+                <div class="d-flex justify-content-between comment-box-name mb-2">{{ node.name }}<div>
+
+                    </div>{{ node.publish }}</div>
+                <div>{{ node.content }}</div>
+                <button class="button btn mt-5" onclick="myFunction({{ node.id }})">Reply</button>
+            </div>
+            {% if not node.is_leaf_node %}
+            <div
+                class="{% if node.level < 3 %} children pl-2 pl-md-5 {% else %} children children2 pl-2 pl-md-5 {% endif %}">
+                {{ children }}
+            </div>
+            {% endif %}
+            {% endrecursetree %}
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="leave-comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Leave a comment
+        </button>
+
+
     </div>
-</div>
 
-<script>
-    function formExit() {
-        document.getElementById("newForm").remove();
-    }
-
-    function myFunction(id) {
-        if (document.contains(document.getElementById("newForm"))) {
+    <script>
+        function formExit() {
             document.getElementById("newForm").remove();
         }
 
-        var d1 = document.getElementById(id);
-        d1.insertAdjacentHTML('afterend',
-            '<form id="newForm" class="form-insert py-2" method="post"> \
-                <div class="d-flex justify-content-between"><h2>Reply:</h2><div><button type="button" class="btn btn-outline-secondary" onclick="formExit()"">Close</button></div></div> \
+        function myFunction(id) {
+            if (document.contains(document.getElementById("newForm"))) {
+                document.getElementById("newForm").remove();
+            }
+
+            var d1 = document.getElementById(id);
+            d1.insertAdjacentHTML('afterend',
+                '<form id="newForm" class="form-insert py-2" method="post"> \
+                <div class="d-flex justify-content-between"><h2 class="mb-3" style="font-weight: 300;">REPLY:</h2><div><button type="button" class="btn btn-outline-secondary" onclick="formExit()"">Close</button></div></div> \
                 <label for="id_name">Name:</label> \
-                <input type="text" name="name" class="col-sm-12" maxlength="50" required="" id="id_name">\
+                <input type="text" name="name" class="col-sm-12 reply-comment-popup-fields" maxlength="50" required="" id="id_name">\
                 <select name="parent" class="d-none" id="id_parentt"> \
                 <option value="' + id + '" selected="' + id + '"></option> \
                 </select> \
                 <label for="id_email">Email:</label> \
-                <input type="text" name="email" class="col-sm-12" maxlength="254" required="" id="id_email"> \
+                <input type="text" name="email" class="col-sm-12 reply-comment-popup-fields" maxlength="254" required="" id="id_email"> \
                 <label for="id_content">Content:</label> \
-                <textarea name="content" cols="40" rows="5" class="form-control" required id="id_content"></textarea> \
+                <textarea name="content" cols="40" rows="5" class="form-control reply-comment-popup-fields" required id="id_content"></textarea> \
                 {% csrf_token %} \
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button> \
+                <button type="submit" class="btn mt-3">Reply</button> \
               </form>');
-    }
+        }
 
-    $('#myForm').trigger("reset");
+        $('#myForm').trigger("reset");
 
-    $(document).on('click', '#like-button', function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '{% url "accounts:like" %}',
-            data: {
-                postid: $('#like-button').val(),
-                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-                action: 'post'
-            },
-            success: function (json) {
-                document.getElementById("like_count").innerHTML = json['result']
-            },
-            error: function (xhr, errmsg, err) {
+        $(document).on('click', '#like-button', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "accounts:like" %}',
+                data: {
+                    postid: $('#like-button').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+                success: function (json) {
+                    document.getElementById("like_count").innerHTML = json['result']
+                },
+                error: function (xhr, errmsg, err) {
 
-            }
-        });
-    })
-</script>
+                }
+            });
+        })
+    </script>
 
-{% include "includes/footer.html" %}
-{% endblock %}
+    {% include "includes/footer.html" %}
+    {% endblock %}

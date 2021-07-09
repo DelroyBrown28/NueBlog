@@ -12,7 +12,9 @@ LITTLE HELPERS
     border: 1px solid blue;
 }
 
-
+* {
+    border-radius: 0px !important;
+}
 
 .flexed {
     display: flex;
@@ -249,9 +251,6 @@ BUTTONS
     border-radius: 0px;
 }
 
-/* .post-image {
-    filter: brightness(90%);
-} */
 
 .card-body {
     flex: 1 1 auto;
@@ -260,6 +259,37 @@ BUTTONS
     height: 205px;
 
 
+}
+
+.alternative-featured-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 345px;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: pink;
+    background-clip: border-box;
+    border: none;
+    transition: 0.3s ease-out;
+    border-top: 3px solid #222;
+    border-bottom: 3px solid #222;
+
+}
+
+.featured-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 345px;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #000;
+    background-clip: border-box;
+    border: none;
+    transition: 0.3s ease-out;
+    border-top: 3px solid #222;
+    border-bottom: 3px solid #222;
 }
 
 .card {
@@ -329,6 +359,54 @@ POST DISPLAY PAGE
     font-weight: 500;
 }
 
+.reply-comment-popup-fields {
+    border-bottom: 1px solid #222 !important;
+
+}
+
+.comment-form p label {
+    font-size: 16px;
+
+}
+
+.comment-form p input {
+    border: none;
+    border-bottom: 1px solid #222;
+    padding: 0;
+}
+
+input[type="text" i] {
+    border: none;
+}
+
+.form-control:focus {
+    border-bottom: 1px solid #48AA8B !important;
+    box-shadow: none;
+}
+
+#id_name:active {
+    border: none !important;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 0.3rem;
+    outline: 0;
+  }
+
+  .leave-comment-btn {
+      background-color: #fff;
+      color: #48AA8B;
+      border: none;
+      height: 50px;
+  }
+
 /* 
 ===================
 FAVORITE POSTS PAGE
@@ -342,6 +420,7 @@ FAVORITE POSTS PAGE
 
 
 }
+
 .remove-post-button {
     width: 100%;
     color: #000;
@@ -351,3 +430,4 @@ FAVORITE POSTS PAGE
 .remove-post-button:hover {
     color: #48AA8B;
 }
+
