@@ -31,7 +31,8 @@ class Post(models.Model):
         ('published', 'Published'),
     }
     FEATURED = {
-        ('featured', 'Featured'),
+        ('featured_large', 'Large Feature'),
+        ('featured_small_1', 'Small Feature 1'),
         ('not-featured', '--'),
     }
     title = models.CharField(max_length=250)
@@ -46,7 +47,10 @@ class Post(models.Model):
     favorites = models.ManyToManyField(User, related_name='favorite', default=None, blank=True)
     likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
     like_count = models.BigIntegerField(default='0')
-    featured = models.CharField(max_length=12, choices=FEATURED, default='not-featured')
+    # large_feature = models.CharField(max_length=20, choices=FEATURED, default='not-featured')
+    large_feature = models.BooleanField(default=False)
+    small_feature_1 = models.BooleanField(default=False)
+    small_feature_2 = models.BooleanField(default=False)
     publish = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER
     newmanager = NewManager() # CUSTOM MANAGER

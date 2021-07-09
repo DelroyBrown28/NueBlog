@@ -47,7 +47,7 @@ JUMBOTRON
 */
 
 .jumbotron-logo {
-    height: 150px;
+    height: 100px;
 }
 
 .jumbotron {
@@ -257,39 +257,82 @@ BUTTONS
     padding: 1rem 1rem;
     background: #FFF;
     height: 205px;
-
-
 }
 
-.alternative-featured-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 345px;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: pink;
-    background-clip: border-box;
-    border: none;
-    transition: 0.3s ease-out;
-    border-top: 3px solid #222;
-    border-bottom: 3px solid #222;
-
+.featured-title {
+    font-size: 4.5rem !important;
+    font-weight: 200;
+    letter-spacing: -5px;
+    text-align: center;
 }
+
 
 .featured-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 345px;
+    width: 100%;
+    height: fit-content;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #000;
+    background-color: #fff;
     background-clip: border-box;
     border: none;
     transition: 0.3s ease-out;
-    border-top: 3px solid #222;
-    border-bottom: 3px solid #222;
+}
+
+.featured-card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+    background: #FFF;
+    height: 205px;
+
+
+    border: 1px solid red;
+}
+
+.featured-card-img-top {
+    height: 85%;
+    border-radius: 0px;
+    
+
+}
+
+.small-featured-box {
+    height: 500px;
+    flex-flow: column !important;
+    justify-content: space-between !important;
+
+}
+
+.small-featured-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: none;
+    transition: 0.3s ease-out;
+
+}
+
+.small-featured-card-img-top {
+    height: 168px;
+    width: 100%;
+
+
+}
+
+.logo-section {
+    width: 100%;
+}
+
+.featured-section-logo {
+    width: 100%;
 }
 
 .card {
@@ -303,11 +346,12 @@ BUTTONS
     background-clip: border-box;
     border: none;
     transition: 0.3s ease-out;
-
     border-top: 3px solid #222;
     border-bottom: 3px solid #222;
 
 }
+
+
 
 .card:hover {
     transform: translateY(-5px);
