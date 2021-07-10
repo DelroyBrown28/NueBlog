@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -48,7 +49,7 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
     like_count = models.BigIntegerField(default='0')
     # large_feature = models.CharField(max_length=20, choices=FEATURED, default='not-featured')
-    large_feature = models.BooleanField(default=False)
+    large_feature = models.BooleanField()
     small_feature_1 = models.BooleanField(default=False)
     small_feature_2 = models.BooleanField(default=False)
     publish = models.DateTimeField(default=timezone.now)
@@ -60,6 +61,7 @@ class Post(models.Model):
 
     def __unicode__(self):
         return "{0}".format(self.title)
+    
     
     def get_absolute_url(self):
         return reverse("blog:post_single", args=[self.slug])

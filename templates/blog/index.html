@@ -25,15 +25,18 @@ Nue Blog
         <div class="row">
             {% for post in posts %}
             {% if post.large_feature == True %}
-            <div class="col-md-9">
+            <div class="col-md-7">
                 <a class="text-dark" href="{{post.get_absolute_url}}">
                     <div class="featured-card mb-5">
-                        <!-- <div class="featured-card-body">
-                            <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
-                            <p class="card-text" style="height: 65px;">{{post.excerpt|truncatechars:50}}</p>
+                        <div class="large-feature-overlay">
 
+                            <div class="featured-card-body">
+                                <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
+                                <p class="card-text" style="height: 65px;">{{post.excerpt|truncatechars:50}}</p>
+    
+                            </div>
                         </div>
-                        <div class="d-flex py-1 justify-content-between align-items-right">
+                        <!-- <div class="d-flex py-1 justify-content-between align-items-right">
                             <small class="text-muted post-published-date">{{post.publish}}</small>
                             <small class="text-muted post-author">{{post.author}}</small>
 
@@ -47,10 +50,10 @@ Nue Blog
             {% endif %}
             {% endfor %}
 
-            <div class="col-md-3 small-featured-box flexed">
-                <div class="col-md-3 logo-section flexed">
+            <div class="col-md-5 small-featured-box flexed">
+                <!-- <div class="col-md-5 logo-section flexed">
                     <h2 class="featured-title">LATESTS POSTS</h2>
-                </div>
+                </div> -->
                 {% for post in posts %}
                 {% if post.small_feature_1 == True %}
                 <a class="text-dark" href="{{post.get_absolute_url}}">

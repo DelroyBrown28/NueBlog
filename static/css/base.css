@@ -260,12 +260,20 @@ BUTTONS
 }
 
 .featured-title {
-    font-size: 4.5rem !important;
+    font-size: 3.3rem !important;
     font-weight: 200;
     letter-spacing: -5px;
     text-align: center;
 }
 
+.large-feature-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+    opacity: 0;
+
+}
 
 .featured-card {
     position: relative;
@@ -281,18 +289,21 @@ BUTTONS
     transition: 0.3s ease-out;
 }
 
+.featured-card:hover>.large-feature-overlay {
+    opacity: 1;
+}
+
 .featured-card-body {
     flex: 1 1 auto;
     padding: 1rem 1rem;
-    background: #FFF;
-    height: 205px;
-
-
-    border: 1px solid red;
+    background: transparent;
+    height: 100%;
+    color: #fff;
+    
 }
 
 .featured-card-img-top {
-    height: 85%;
+    height:500px;
     border-radius: 0px;
     
 
@@ -300,6 +311,7 @@ BUTTONS
 
 .small-featured-box {
     height: 500px;
+    width: 100%;
     flex-flow: column !important;
     justify-content: space-between !important;
 
@@ -310,7 +322,7 @@ BUTTONS
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: fit-content;
+    height: calc(500px / 2 - 20px);
     min-width: 0;
     word-wrap: break-word;
     background-color: #fff;
@@ -321,7 +333,7 @@ BUTTONS
 }
 
 .small-featured-card-img-top {
-    height: 168px;
+    height: 100%;
     width: 100%;
 
 
