@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_social_share',
     # MY STUFF
     'blog',
     'accounts',
@@ -68,7 +69,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'NueBlog.wsgi.application'
 
-
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 DATABASES = {
     'default': {

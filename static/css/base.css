@@ -272,6 +272,8 @@ BUTTONS
     height: 100%;
     transition: 0.3s;
     opacity: 0;
+    background: rgb(72, 170, 139);
+    background: linear-gradient(176deg, rgba(72, 170, 139, 0.8407738095238095) 0%, rgba(72, 170, 139, 0.2805497198879552) 35%, rgba(72, 170, 139, 0.053658963585434205) 100%);
 
 }
 
@@ -299,13 +301,13 @@ BUTTONS
     background: transparent;
     height: 100%;
     color: #fff;
-    
+
 }
 
 .featured-card-img-top {
-    height:500px;
+    height: 500px;
     border-radius: 0px;
-    
+
 
 }
 
@@ -322,7 +324,7 @@ BUTTONS
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(500px / 2 - 20px);
+    height: calc(500px / 2 - 10px);
     min-width: 0;
     word-wrap: break-word;
     background-color: #fff;
@@ -345,6 +347,11 @@ BUTTONS
 
 .featured-section-logo {
     width: 100%;
+}
+
+.socials {
+    height: 65%;
+    font-size: 1.5rem;
 }
 
 .card {
@@ -431,7 +438,7 @@ POST DISPLAY PAGE
     padding: 0;
 }
 
-input[type="text" i] {
+input[type="text"i] {
     border: none;
 }
 
@@ -454,14 +461,14 @@ input[type="text" i] {
     background-clip: padding-box;
     border-radius: 0.3rem;
     outline: 0;
-  }
+}
 
-  .leave-comment-btn {
-      background-color: #fff;
-      color: #48AA8B;
-      border: none;
-      height: 50px;
-  }
+.leave-comment-btn {
+    background-color: #fff;
+    color: #48AA8B;
+    border: none;
+    height: 50px;
+}
 
 /* 
 ===================
@@ -486,4 +493,3 @@ FAVORITE POSTS PAGE
 .remove-post-button:hover {
     color: #48AA8B;
 }
-

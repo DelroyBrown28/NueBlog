@@ -1,8 +1,10 @@
 import uuid
 from django.db import models
+from django import forms
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.contrib import messages
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -49,12 +51,16 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
     like_count = models.BigIntegerField(default='0')
     # large_feature = models.CharField(max_length=20, choices=FEATURED, default='not-featured')
-    large_feature = models.BooleanField()
-    small_feature_1 = models.BooleanField(default=False)
-    small_feature_2 = models.BooleanField(default=False)
+    large_feature = models.BooleanField(
+        help_text='Select to display as the large featured post')
+    small_feature_1 = models.BooleanField(
+        help_text='Select to display as one of the smaller featured post')
+    small_feature_2 = models.BooleanField(
+        help_text='Select to display as one of the smaller featured post')
     publish = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER
     newmanager = NewManager() # CUSTOM MANAGER
+    
     
     def get_likes(self):
         return ", ".join([str(p) for p in self.likes.all()])
@@ -62,7 +68,7 @@ class Post(models.Model):
     def __unicode__(self):
         return "{0}".format(self.title)
     
-    
+  
     def get_absolute_url(self):
         return reverse("blog:post_single", args=[self.slug])
     

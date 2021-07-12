@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load social_share %}
+
 
 {% block title %}
 Nue Blog
@@ -28,12 +30,22 @@ Nue Blog
             <div class="col-md-7">
                 <a class="text-dark" href="{{post.get_absolute_url}}">
                     <div class="featured-card mb-5">
-                        <div class="large-feature-overlay">
+                        <div class="large-feature-overlay flexed">
 
                             <div class="featured-card-body">
-                                <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
-                                <p class="card-text" style="height: 65px;">{{post.excerpt|truncatechars:50}}</p>
-    
+                                <h2 style="font-size:18px;font-weight:bold;color: white;">{{post.title|truncatechars:50}}</h2>
+                                <p class="card-text" style="height: 65px;">By: {{post.author}}</p>
+                                <div class="socials row">
+                                    {% post_to_facebook object_or_url "<i style='color: #FFF    ' class='fab fa-facebook-f'></i>" %}
+                                    {% post_to_twitter "Check out this post by {{ post.author }}, called {{ post.title }}" object_or_url "<i style='color: #FFF' class='fab fa-twitter'></i>" %}
+                                    <a style="cursor: pointer;" class="pinterest-this ">
+                                        <span class="PIN_1626091531472_button_pin PIN_1626091531472_save"
+                                            data-pin-log="button_pinit_bookmarklet"><i style='color: #FFF'
+                                                class="fab fa-pinterest"></i></span>
+                                    </a>
+                                    {% post_to_reddit "Check out this post by {{ post.author }}, called {{ post.title }}" object_or_url "<i style='color: #FFF' class='fab fa-reddit'></i>" %}
+                                    {% post_to_whatsapp  object_or_url "<i style='color: #FFF' class='fab fa-whatsapp'></i>" %}
+                                </div>
                             </div>
                         </div>
                         <!-- <div class="d-flex py-1 justify-content-between align-items-right">
@@ -41,8 +53,9 @@ Nue Blog
                             <small class="text-muted post-author">{{post.author}}</small>
 
                         </div> -->
-                        <img class="featured-card-img-top img-fluid post-image" src="{{ post.image.url }}" alt="{{ post.title }}">
-                        
+                        <img class="featured-card-img-top img-fluid post-image" src="{{ post.image.url }}"
+                            alt="{{ post.title }}">
+
                     </div>
                 </a>
 
@@ -68,13 +81,14 @@ Nue Blog
                             <small class="text-muted post-author">{{post.author}}</small>
             
                         </div> -->
-                        <img class="small-featured-card-img-top img-fluid post-image" src="{{ post.image.url }}" alt="{{ post.title }}">
-                        
+                        <img class="small-featured-card-img-top img-fluid post-image" src="{{ post.image.url }}"
+                            alt="{{ post.title }}">
+
                     </div>
                 </a>
                 {% endif %}
                 {% endfor %}
-                
+
                 {% for post in posts %}
                 {% if post.small_feature_2 == True %}
                 <a class="text-dark" href="{{post.get_absolute_url}}">
@@ -89,8 +103,9 @@ Nue Blog
                             <small class="text-muted post-author">{{post.author}}</small>
             
                         </div> -->
-                        <img class="small-featured-card-img-top img-fluid post-image" src="{{ post.image.url }}" alt="{{ post.title }}">
-                        
+                        <img class="small-featured-card-img-top img-fluid post-image" src="{{ post.image.url }}"
+                            alt="{{ post.title }}">
+
                     </div>
                 </a>
                 {% endif %}
@@ -106,7 +121,7 @@ Nue Blog
     <div class="container">
         <div class="row">
             {% for post in posts %}
-            
+
             <div class="col-md-3 flexed">
                 <a class="text-dark" href="{{post.get_absolute_url}}">
                     <div class="card mb-5">
@@ -124,12 +139,13 @@ Nue Blog
                     </div>
                 </a>
             </div>
-                
+
             {% endfor %}
 
         </div>
     </div>
 </div>
 <!-- POSTS -->
+{% add_pinterest_script %}
 
 {% endblock content %}
