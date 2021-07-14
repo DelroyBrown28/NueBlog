@@ -44,7 +44,8 @@
     </div>
 
 
-    <p><a href="{% url "blog:post_search" %}" class="btn btn-primary" role="button" aria-disabled="true">New
+    <p>
+        <a href="{% url "blog:post_search" %}" class="btn btn-primary" role="button" aria-disabled="true">New
             Search</a>
     </p>
     {% else %}
@@ -52,7 +53,6 @@
     <form class="dropdown" method="get">
         {% csrf_token %}
         {{ form.q }}
-
         <ul class="dropdown-menu col-12 pl-2" role="menu" aria-labelledby="menu" id="list">
             {% for category in category_list  %}
             <li role="presentation">
@@ -62,25 +62,11 @@
             </li>
             {% endfor %}
         </ul>
-
-
-        <!-- <ul class="dropdown-menu col-12 pl-2" role="menu" aria-labelledby="menu" id="list">
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
-            <div class="dropdown-divider"></div>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-            <div class="dropdown-divider"></div>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
-        </ul> -->
-
-        {{ form.c }}
-
-        <input class="btn btn-primary my-1" type="submit" value="Search">
+        <input class="btn btn-primary my-3" type="submit" value="Search">
     </form>
     {% endif %}
 
 </div>
-
-
 <script>
     $(document).on('keyup', '#id_q', function (e) {
         e.preventDefault();
@@ -119,8 +105,4 @@
         }
     })
 </script>
-
-
-
-
 {% endblock %}

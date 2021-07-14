@@ -53,9 +53,7 @@ class Post(models.Model):
     # large_feature = models.CharField(max_length=20, choices=FEATURED, default='not-featured')
     large_feature = models.BooleanField(
         help_text='Select to display as the large featured post')
-    small_feature_1 = models.BooleanField(
-        help_text='Select to display as one of the smaller featured post')
-    small_feature_2 = models.BooleanField(
+    small_feature = models.BooleanField(
         help_text='Select to display as one of the smaller featured post')
     publish = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER

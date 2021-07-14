@@ -135,12 +135,14 @@
             <div class="col-12 p-0">
                 <img class="img-fluid" style="width: 100%;" src="{{post.image.url}}" alt="{{ post.title }}">
             </div>
-            <div class="col-12 p-0 my-3 d-flex justify-content-between">
-                <h1 class="post-title">{{post.title}}</h1>
+            <div class="col-12 p-0 pl-3 mt-3" style="border-left: 4px solid #48AA8B;">
+                <h1 class="post-title my-2">{{post.title}}</h1>
+                {% include 'includes/socials.html' %}
             </div>
-            <div class="col-12 post-content mt-5">
+            <div class="col-12 post-content p-0">
                 <p>{{post.content|linebreaks}}</p>
             </div>
+            <hr class="my-5">
         </div>
 
         
