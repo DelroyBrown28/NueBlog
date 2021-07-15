@@ -72,24 +72,24 @@ WSGI_APPLICATION = 'NueBlog.wsgi.application'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    'default' : {
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'NueBlog',
-        'USER' : 'postgres',
-        'PASSWORD' : 'william17',
-        'HOST' : 'localhost',
-        'PORT' : '5433',
-        
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default' : {
+#         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+#         'NAME' : 'NueBlog',
+#         'USER' : 'postgres',
+#         'PASSWORD' : 'william17',
+#         'HOST' : 'localhost',
+#         'PORT' : '5433',
+        
+#     }
+# }
 
 
 AUTH_PASSWORD_VALIDATORS = [

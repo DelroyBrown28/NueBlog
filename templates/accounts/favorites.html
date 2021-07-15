@@ -16,11 +16,11 @@
             <h1 class="display-4 mb-4">
                 <img class="img-fluid jumbotron-logo" src="{% static 'images/nueuibloglogo.png' %}">
             </h1>
-            <h1>Here are your saved posts</h1>
-            <p class="lead text-muted">Here you can remove or view the favorites posts you have added
+            <h1 style="font-weight: 300;">YOUR SAVED POSTS</h1>
+            <!-- <p class="lead text-muted">Here you can remove or view the favorites posts you have added -->
             </p>
             <p>
-                <a href="{% url 'accounts:profile' %}" class="btn btn-primary my-2">Profile</a>
+                <a href="{% url 'accounts:profile' %}" class="btn btn-primary my-2">Back To Profile</a>
             </p>
         </div>
     </section>
@@ -32,7 +32,7 @@
         <div class="row">
             {% for post in new %}
             <div class="col-md-3">
-                <a class="text-dark" href="{{post.get_absolute_url}}">
+                <a class="text-dark"  href="{{post.get_absolute_url}}">
                     <div class="card mb-5">
                         <div class="remove-section">
                             <a href="{% url 'accounts:favorites_add' post.id %}"

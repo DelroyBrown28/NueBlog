@@ -31,7 +31,7 @@ class PostSearchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['q'].label = 'Search For'
+        self.fields['q'].label = 'Search Form'
         self.fields['q'].widget.attrs.update(
-            {'class': 'form-control menudd'})
+            {'class': 'form-control menudd', 'placeholder' : 'Search'})
     

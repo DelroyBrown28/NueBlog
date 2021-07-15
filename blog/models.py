@@ -33,15 +33,10 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     }
-    FEATURED = {
-        ('featured_large', 'Large Feature'),
-        ('featured_small_1', 'Small Feature 1'),
-        ('not-featured', '--'),
-    }
     title = models.CharField(max_length=250)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=1)
     excerpt = models.TextField(null=True)
-    image = models.ImageField(upload_to=user_directory_path, default='posts/default.jpg')
+    image = models.ImageField(upload_to='posts/%Y/%m/%d/', default='posts/default.jpg')
     image_caption = models.CharField(max_length=100, default='Image caption.')
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
@@ -50,7 +45,11 @@ class Post(models.Model):
     favorites = models.ManyToManyField(User, related_name='favorite', default=None, blank=True)
     likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
     like_count = models.BigIntegerField(default='0')
-    # large_feature = models.CharField(max_length=20, choices=FEATURED, default='not-featured')
+    
+    thumbsup = models.IntegerField(default='0')
+    thumbsdown = models.IntegerField(default='0')
+    thumbs = models.ManyToManyField(User, related_name='thumbs', default=None, blank=True)
+    
     large_feature = models.BooleanField(
         help_text='Select to display as the large featured post')
     small_feature = models.BooleanField(
@@ -95,3 +94,15 @@ class Comment(MPTTModel):
         
     def __str__(self):
         return f"Comment by {self.name} on {self.post}"
+    
+    
+    
+class Vote(models.Model):
+    post = models.ForeignKey(Post, related_name='postid',
+                             on_delete=models.CASCADE, default=None, blank=True)
+    user = models.ForeignKey(User, related_name='userid',
+                             on_delete=models.CASCADE, default=None, blank=True)
+    vote = models.BooleanField(default=True)
+    
+    
+    

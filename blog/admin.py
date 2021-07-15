@@ -15,4 +15,5 @@ class PostAdmin(admin.ModelAdmin):
 
     
 admin.site.register(models.Category)
+admin.site.register(models.Vote)
 admin.site.register(models.Comment, MPTTModelAdmin)
