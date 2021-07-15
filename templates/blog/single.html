@@ -80,7 +80,7 @@
                     <a {% if request.user.is_authenticated %}
                         class="btn-link text-dark p-0 border-0 btn-outline-light thumbaction" {% else %}
                         href="{% url 'accounts:register' %}"
-                        class="btn btn-link text-dark p-0 border-0 btn-outline-light" {% endif %} value="thumbsup"
+                        class="btn-link text-dark p-0 border-0 btn-outline-light" {% endif %} value="thumbsup"
                         data-toggle="tooltip" title="I like this" role="button">
                         <svg id="thumbsup" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                             class="up bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +94,7 @@
                     <a {% if request.user.is_authenticated %}
                         class="btn-link text-dark p-0 border-0 btn-outline-light thumbaction" {% else %}
                         href="{% url 'accounts:register' %}"
-                        class="btn btn-link text-dark p-0 border-0 btn-outline-light" {% endif %} value="thumbsdown"
+                        class="btn-link text-dark p-0 border-0 btn-outline-light" {% endif %} value="thumbsdown"
                         data-toggle="tooltip" title="I dont like this" role="button">
                         <svg id="thumbsdown" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                             class="down bi bi-hand-thumbs-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -219,6 +219,7 @@ BUTTONS
 }
 
 .btn:hover {
+    border: 1px solid #48AA8B;
     background-color: #FFF;
     color: #48AA8B;
 }
@@ -535,6 +536,8 @@ POST DISPLAY PAGE
     font-weight: 300;
     margin-top: 65px;
 }
+
+
 
 /* COMMENT BOX */
 
