@@ -260,6 +260,13 @@ BUTTONS
     padding: 1rem 1rem;
     background: #FFF;
     height: 205px;
+    box-shadow:
+        0 1.2px 3.7px rgba(0, 0, 0, 0.06),
+        0 3px 8.8px rgba(0, 0, 0, 0.043),
+        0 5.6px 16.7px rgba(0, 0, 0, 0.036),
+        0 10.1px 29.7px rgba(0, 0, 0, 0.03),
+        0 18.8px 55.6px rgba(0, 0, 0, 0.024),
+        0 45px 133px rgba(0, 0, 0, 0.017);
 }
 
 .featured-title {
@@ -403,7 +410,7 @@ BUTTONS
     width: 345px;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: transparent;
     background-clip: border-box;
     border: none;
     transition: 0.3s ease-out;
@@ -502,10 +509,12 @@ BUTTONS
 
 .post-published-date {
     padding-left: 16px;
+    color: #000;
 }
 
 .post-author {
     padding-right: 16px;
+    color: #000;
 }
 
 
@@ -633,9 +642,7 @@ SEARCH PAGE
     border-bottom: 1px solid #000;
 }
 
-.search-form {
-    
-}
+.search-form {}
 
 
 
