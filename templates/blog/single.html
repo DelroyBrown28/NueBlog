@@ -7,16 +7,15 @@
 {% block content %}
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
-
     .h1 {
+        font-family: 'PT Serif', serif;
         font-size: 2.55rem;
         line-height: 2.6rem;
         letter-spacing: -0.063px;
     }
 
     h2 {
+        font-family: 'PT Serif', serif;
         font-size: 1.9rem;
         line-height: 2.6rem;
         letter-spacing: -0.063px;
@@ -25,12 +24,9 @@
     }
 
     p {
+        font-family: 'PT Serif', serif;
         line-height: 2rem;
         font-size: 1.3rem
-    }
-
-    .thumb-active {
-        fill:#48AA8B;
     }
 
     @media screen and (min-width: 600px) {
@@ -45,6 +41,7 @@
         }
     }
 
+    .avatar_comment,
     .avatar_single {
         height: 48px;
         width: 48px;
@@ -56,6 +53,24 @@
 
     .smaller {
         font-size: 0.8rem;
+    }
+
+    .thumb-active {
+        fill: #48AA8B
+    }
+
+
+    .comment-add {
+        border-bottom: 1px solid #ccc !important;
+    }
+
+    .comment-add:focus {
+        border-color: #1497ff;
+        box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 0px rgba(255, 0, 0, 0.6);
+    }
+
+    .node-content {
+        padding-left: 64px;
     }
 </style>
 
@@ -79,9 +94,8 @@
                     <span id="i_like_this"><span id="up">{{post.thumbsup}}</span></span>
                     <a {% if request.user.is_authenticated %}
                         class="btn-link text-dark p-0 border-0 btn-outline-light thumbaction" {% else %}
-                        href="{% url 'accounts:register' %}"
-                        class="btn-link text-dark p-0 border-0 btn-outline-light" {% endif %} value="thumbsup"
-                        data-toggle="tooltip" title="I like this" role="button">
+                        href="{% url 'accounts:register' %}" class="btn-link text-dark p-0 border-0 btn-outline-light"
+                        {% endif %} value="thumbsup" data-toggle="tooltip" title="I like this" role="button">
                         <svg id="thumbsup" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                             class="up bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -93,9 +107,8 @@
                     <span id="down">{{post.thumbsdown}}</span>
                     <a {% if request.user.is_authenticated %}
                         class="btn-link text-dark p-0 border-0 btn-outline-light thumbaction" {% else %}
-                        href="{% url 'accounts:register' %}"
-                        class="btn-link text-dark p-0 border-0 btn-outline-light" {% endif %} value="thumbsdown"
-                        data-toggle="tooltip" title="I dont like this" role="button">
+                        href="{% url 'accounts:register' %}" class="btn-link text-dark p-0 border-0 btn-outline-light"
+                        {% endif %} value="thumbsdown" data-toggle="tooltip" title="I dont like this" role="button">
                         <svg id="thumbsdown" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                             class="down bi bi-hand-thumbs-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -190,161 +203,272 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content p-5">
-                    <div class="col-md-12">
 
-                        {% load mptt_tags %}
-
-                        <!-- <nav aria-label="Page navigation example">
-                            {% if comments.has_other_pages %}
-                            <ul class="pagination">
-                                {% if comments.has_previous %}
-                                <li class="page-item"><a class="page-link"
-                                        href="?page={{ comments.previous_page_number }}">Previous</a>
-                                </li>
-                                {% else %}
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                {% endif %}
-                                {% for num in comments.paginator.page_range %}
-                                {% if comments.number == l %}
-                                <li class="page-item active"><span class="page-link">{{ num }} <span
-                                            class="sr-only">(current)</span></span>
-                                </li>
-                                {% else %}
-                                <li><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                                {% endif %}
-                                {% endfor %}
-                                {% if comments.has_next %}
-                                <li class="page-item"><a class="page-link"
-                                        href="?page={{ comments.next_page_number }}">Next</a>
-                                </li>
-                                {% else %}
-                                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                                {% endif %}
-                            </ul>
-                            {% endif %}
-                        </nav> -->
-
-                        <form id="myForm" class="comment-form" method="post">
-                            <h2 class="mb-5" style="font-weight: 300;">PLEASE LEAVE YOUR THOUGHTS</h2>
-                            {{ comment_form.as_p }}
-                            {% csrf_token %}
-                            <button type="submit" class="btn">Submit</button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Comments -->
         <div class="comments-section mt-5">
-            {% with allcomments.count as total_comments %}
-            <small style="font-weight: 300;">
-                {{ total_comments }} comment{{ total_comments|pluralize }}
-            </small>
-            {% endwith %}
-            {% recursetree comments %}
-            <div id="{{ node.id }}" class="my-5 comment-box pl-3">
-                <div class="d-flex justify-content-between comment-box-name mb-2">{{ node.name }}<div>
 
-                    </div>{{ node.publish }}</div>
-                <div>{{ node.content }}</div>
-                <button class="button btn mt-5" onclick="myFunction({{ node.id }})">Reply</button>
+            {% load mptt_tags %}
+            <div class="allcommments">
+
+                {% recursetree allcomments %}
+                <div id="{{ node.id }}" class="my-2 p-2 redborder" style="border: 0px solid grey">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <img class="avatar_single mr-3" src="{{ node.author.profile.avatar.url }}">
+                            By {{ node.author }}
+                        </div>
+                        <small>{{ node.publish }}</small>
+                    </div>
+
+                    <div class="node-content">{{ node.content }}</div>
+
+                    <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-primary btn-sm" onclick="myFunction({{ node.id }})">Reply</button>
+                        {% if node.author|stringformat:"s" == user.get_username  %}
+                        <button class="btn btn-secondary btn-sm mr-2"
+                            onclick="deleteComment({{ node.id }})">Delete</button>
+                        {% endif %}
+                    </div>
+                    <hr />
+                </div>
+
+                {% if not node.is_leaf_node %}
+                <div class="{% if node.level < 3 %}
+                children pl-2 pl-md-5
+                {% else %}
+                children children2 pl-0 pl-md-0
+                {% endif %}">
+                    {{ children }}
+                </div>
+                {% endif %}
+                {% endrecursetree %}
+                <div class="col-md-12">
+
+                    {% load mptt_tags %}
+                    <form id="commentform" class="commentform" method="post">
+                        {% csrf_token %}
+                        {% with allcomments.count as total_comments  %}
+                        <p>{{ total_comments }} comment{{ total_comments|pluralize }}</p>
+                        {% endwith allcomments %}
+                        <select name="post" class="d-none" id="id_post">
+                            <option value='{{ post.id }}' selected='{{ post.id }}'></option>
+                        </select>
+                        <label class="small font-weight-bold">{{ comment_form.parent.label }}</label>
+                        {{ comment_form.parent }}
+                        <div class="d-flex">
+                            <img class="avatar_comment align-self-center mr-2"
+                                src="{% for data in avatar %}{{ data.avatar }}{% endfor %}">
+                            {{ comment_form.content }}
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <button value="commentform" id="newcomment" type="submit"
+                                class="newcomment btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            {% if not node.is_leaf_node %}
-            <div
-                class="{% if node.level < 3 %} children pl-2 pl-md-5 {% else %} children children2 pl-2 pl-md-5 {% endif %}">
-                {{ children }}
-            </div>
-            {% endif %}
-            {% endrecursetree %}
         </div>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="leave-comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Leave a comment
-        </button>
+        <div id="25" class="my-2 p-2 redborder" style="border: 0px solid grey">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <img class="avatar_single mr-3" src="{{ node.author.profile.avatar.url }}">
+                    By {{ node.author }}
+                </div>
+                <small>{{ node.publish }}</small>
+            </div>
+            <div class="node-content">{{ node.content }}</div>
+            <hr>
+        </div>
+
+        <script>
+            // Comments
+            $(document).on('click', '#newcomment, #newcommentinner', function (e) {
+                e.preventDefault();
+
+                var button = $(this).attr("value");
+
+                var placement = "commentform"
+                if (button == "newcommentform") {
+                    var placement = "newcommentform"
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "blog:addcomment" %}',
+                    data: $("#" + button).serialize(),
+                    cache: false,
+                    success: function (json) {
+                        console.log(json)
 
 
-    </div>
+                        $('<div id="" class="my-2 p-2 redborder" style="border: 0px solid grey"> \
+                            <div class="d-flex justify-content-between"> \
+                                <div> \
+                                    <img class="avatar_single mr-3" src="'+ json["avatar"] +'"> \
+                                    By '+ json["user"] +' \
+                                </div> \
+                                <small>'+ json["publish"] +'</small> \
+                            </div> \
+                            <div class="node-content">'+ json['result'] +'</div> \
+                            <hr> \
+                        </div>').insertBefore('#' + placement);
 
-    <script>
-        function formExit() {
-            document.getElementById("newForm").remove();
-        }
+                        $('.commentform').trigger("reset");
+                        formExit()
 
-        function myFunction(id) {
-            if (document.contains(document.getElementById("newForm"))) {
+                    },
+                    error: function (xhr, errmsg, err) {
+
+                    }
+                });
+            })
+
+            function formExit() {
                 document.getElementById("newForm").remove();
             }
 
-            var d1 = document.getElementById(id);
-            d1.insertAdjacentHTML('afterend',
-                '<form id="newForm" class="form-insert py-2" method="post"> \
-                <div class="d-flex justify-content-between"><h2 class="mb-3" style="font-weight: 300;">REPLY:</h2><div><button type="button" class="btn btn-outline-secondary" onclick="formExit()"">Close</button></div></div> \
-                <label for="id_name">Name:</label> \
-                <input type="text" name="name" class="col-sm-12 reply-comment-popup-fields" maxlength="50" required="" id="id_name">\
-                <select name="parent" class="d-none" id="id_parentt"> \
-                <option value="' + id + '" selected="' + id + '"></option> \
-                </select> \
-                <label for="id_email">Email:</label> \
-                <input type="text" name="email" class="col-sm-12 reply-comment-popup-fields" maxlength="254" required="" id="id_email"> \
-                <label for="id_content">Content:</label> \
-                <textarea name="content" cols="40" rows="5" class="form-control reply-comment-popup-fields" required id="id_content"></textarea> \
-                {% csrf_token %} \
-                <button type="submit" class="btn mt-3">Reply</button> \
-              </form>');
-        }
-
-        $('#myForm').trigger("reset");
-
-        $(document).on('click', '#like-button', function (e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '{% url "accounts:like" %}',
-                data: {
-                    postid: $('#like-button').val(),
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-                    action: 'post'
-                },
-                success: function (json) {
-                    document.getElementById("like_count").innerHTML = json['result']
-                },
-                error: function (xhr, errmsg, err) {
-
+            // Comments Reply
+            function myFunction(id) {
+                if (document.contains(document.getElementById("newcommentform"))) {
+                    document.getElementById("newcommentform").remove();
                 }
-            });
-        })
-
-
-
-        $(document).ready(function () {
-            $('.thumbaction').click(function (e) {
                 var postid = document.getElementById('thumbs').getAttribute('data-value');
-                var button = $(this).attr("value");
-                e.preventDefault();
+                var imgFullURL = $('img.avatar_comment')[0].src;
+                var d1 = document.getElementById(id);
+                d1.insertAdjacentHTML('afterend',
+                    '<form id="newcommentform" class="commentform" method="post"> \
+                    {% csrf_token %} \
+                    <select name="post" class="d-none" id="id_post"> \
+                      <option value="' + postid + '" selected="' + postid + '"></option> \
+                    </select> <label class="small font-weight-bold"></label> \
+                    <select name="parent" class="d-none" id="id_parent"> \
+                      <option value="' + id + '" selected="' + id + '"></option> \
+                    </select> \
+                    <div class="d-flex"> \
+                      <img class="avatar_comment align-self-center" src="' + imgFullURL + '"> \
+                      <textarea name="content" cols="40" rows="1" class="ml-3 mb-3 form-control border-0 comment-add rounded-0" placeholder="Add a public comment" required="" id="id_content"></textarea> \
+                    </div> \
+                    <div class="d-flex flex-row-reverse"> \
+                    <button type="button" class="btn btn-outline-secondary" onclick="formExit()">Close</button> \
+                      <button value="newcommentform" id="newcommentinner" type="submit" class="mr-1 newcomment btn btn-primary ">Submit</button> \
+                    </div> \
+                  </form>'
+                );
+            }
+            //Reset form on page reload
+            $('.commentform').trigger("reset");
+
+            function formExit() {
+                document.getElementById("newcommentform").remove();
+                $("#newcommentform").remove();
+            }
+
+            // Delete Comment
+            function deleteComment(id) {
+                console.log(id)
                 $.ajax({
                     type: 'POST',
-                    url: '{% url "accounts:thumbs" %}',
+                    url: '{% url "blog:addcomment" %}',
                     data: {
-                        postid: postid,
+                        nodeid: id,
+                        action: 'delete',
                         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-                        action: 'thumbs',
-                        button: button,
                     },
                     success: function (json) {
-                        document.getElementById("up").innerHTML = json['up']
-                        document.getElementById("down").innerHTML = json['down']
-
-                        $('svg').removeClass("thumb-active");
-                        $('#' + button).addClass("thumb-active");
-
+                        $("#" + json['remove']).remove();
                     },
                     error: function (xhr, errmsg, err) {}
                 });
-            });
-        });
-    </script>
+            }
 
-    {% include "includes/footer.html" %}
-    {% endblock %}
+
+            // Reply to comment
+            function myFunction(id) {
+                if (document.contains(document.getElementById("newcommentform"))) {
+                    document.getElementById("newcommentform").remove();
+                }
+                var postid = document.getElementById('thumbs').getAttribute('data-value');
+                var imgFullURL = $('img.avatar_comment')[0].src;
+                var d1 = document.getElementById(id);
+                d1.insertAdjacentHTML('afterend',
+                    '<form id="newcommentform" class="commentform" method="post"> \
+                    {% csrf_token %} \
+                    <select name="post" class="d-none" id="id_post"> \
+                      <option value="' + postid + '" selected="' + postid + '"></option> \
+                    </select> <label class="small font-weight-bold"></label> \
+                    <select name="parent" class="d-none" id="id_parent"> \
+                      <option value="' + id + '" selected="' + id + '"></option> \
+                    </select> \
+                    <div class="d-flex"> \
+                      <img class="avatar_comment align-self-center" src="' + imgFullURL + '"> \
+                      <textarea name="content" cols="40" rows="1" class="ml-3 mb-3 form-control border-0 comment-add rounded-0" placeholder="Add a public comment" required="" id="id_content"></textarea> \
+                    </div> \
+                    <div class="d-flex flex-row-reverse"> \
+                    <button type="button" class="btn btn-outline-secondary" onclick="formExit()">Close</button> \
+                      <button value="newcommentform" id="newcommentinner" type="submit" class="mr-1 newcomment btn btn-primary ">Submit</button> \
+                    </div> \
+                  </form>'
+                );
+            }
+            //Reset form on page reload
+            $('.commentform').trigger("reset");
+
+
+
+
+            // Heart Likes
+            $(document).on('click', '#like-button', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "accounts:like" %}',
+                    data: {
+                        postid: $('#like-button').val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                        action: 'post'
+                    },
+                    success: function (json) {
+                        document.getElementById("like_count").innerHTML = json['result']
+                    },
+                    error: function (xhr, errmsg, err) {
+
+                    }
+                });
+            })
+
+            // Voting Thumbs
+            $(document).ready(function () {
+                $('.thumbaction').click(function (e) {
+                    var postid = document.getElementById('thumbs').getAttribute('data-value');
+                    var button = $(this).attr("value");
+                    e.preventDefault();
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "accounts:thumbs" %}',
+                        data: {
+                            postid: postid,
+                            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                            action: 'thumbs',
+                            button: button,
+                        },
+                        success: function (json) {
+                            document.getElementById("up").innerHTML = json['up']
+                            document.getElementById("down").innerHTML = json['down']
+
+                            $('svg').removeClass("thumb-active");
+                            $('#' + button).addClass("thumb-active");
+
+                        },
+                        error: function (xhr, errmsg, err) {}
+                    });
+                });
+            });
+        </script>
+
+        {% include "includes/footer.html" %}
+        {% endblock %}

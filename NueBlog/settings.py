@@ -16,7 +16,6 @@ INSTALLED_APPS = [
     # JET
     'jet.dashboard',
     'jet',
-    
     # DJANGO
     'django.contrib.admin',
     'django_quill',
@@ -43,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -138,3 +138,5 @@ LOGOUT_URL = 'logout'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+

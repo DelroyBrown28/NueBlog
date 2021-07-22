@@ -17,42 +17,44 @@ def home(request):
 
 def post_single(request, post):
     post = get_object_or_404(Post, slug=post, status='published')
-    fav = bool
     
+    # Heart likes
+    fav = bool
     if post.favorites.filter(id=request.user.id).exists():
         fav = True
-    
+    # Heart likes
     
     allcomments = post.comments.filter(status=True)
-    page = request.GET.get('page', 1)
-    paginator = Paginator(allcomments, 100)
     
-    try:
-        comments = paginator.page(page)
-    except PageNotAnInteger:
-        comments = paginator.page(1)
-    except EmptyPage:
-        comments = paginator.page(paginator.num_pages)
-        
-    user_comment = None
     
-    if request.method == 'POST':
-        comment_form = NewCommentForm(request.POST)
-        if comment_form.is_valid():
-            user_comment = comment_form.save(commit=False)
-            user_comment.post = post
-            user_comment.save()
-            return HttpResponseRedirect('/' + post.slug)
-    else:
-        comment_form = NewCommentForm()
+    comment_form = NewCommentForm()
+    
     return render(request, 'blog/single.html', {
         'post' : post, 
-        'comments' : user_comment, 
-        'comments' : comments, 
         'comment_form' : comment_form,
         'allcomments' : allcomments,
         'fav' : fav,
         })
+    
+def addcomment(request):
+    
+    if request.method == 'POST':
+        
+        if request.POST.get('action') == 'delete':
+            id = request.POST.get('nodeid')
+            c = Comment.objects.get(id=id)
+            c.delete()
+            return JsonResponse({'remove' : id})
+        else:
+            comment_form = NewCommentForm(request.POST)
+        
+            if comment_form.is_valid():
+                user_comment = comment_form.save(commit=False)
+                user_comment.author = request.user
+                user_comment.save()
+                result = comment_form.cleaned_data.get('content')
+                user = request.user.username
+                return JsonResponse({'result' : result, 'user' : user})        
             
 
 class CategoryListView(ListView):
