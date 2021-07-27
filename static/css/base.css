@@ -689,7 +689,7 @@ POST DISPLAY PAGE
 }
 
 .post-content {
-    font-weight: 300;
+    /* font-weight: 300; */
     margin-top: 65px;
 }
 
@@ -805,6 +805,13 @@ SEARCH PAGE
     border: none;
     border-bottom: 1px solid #000;
 }
+
+
+/* 
+=======
+TINYMCE
+=======
+*/
 
 
 

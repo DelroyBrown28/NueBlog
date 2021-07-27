@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib import messages
 from mptt.models import MPTTModel, TreeForeignKey
+from djrichtextfield.models import RichTextField
 
 
 
@@ -38,10 +39,10 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=1)
     excerpt = models.TextField(null=True)
     image = models.ImageField(upload_to='posts/%Y/%m/%d/', default='posts/default.jpg')
-    image_caption = models.CharField(max_length=100, default='Image caption.')
+    # image_caption = models.CharField(max_length=100, default='Image caption.')
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
-    content = models.TextField()
+    content = RichTextField()
     status = models.CharField(max_length=10, choices=OPTIONS, default='published')
     favorites = models.ManyToManyField(User, related_name='favorite', default=None, blank=True)
     likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
@@ -50,11 +51,6 @@ class Post(models.Model):
     thumbsdown = models.IntegerField(default='0')
     thumbs = models.ManyToManyField(User, related_name='thumbs', default=None, blank=True)
     add_to_carousel = models.BooleanField(default=False)
-    #     help_text='Select to display as the large featured post')
-    # large_feature = models.BooleanField(
-    #     help_text='Select to display as the large featured post')
-    # small_feature = models.BooleanField(
-    #     help_text='Select to display as one of the smaller featured post')
     publish = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER
     newmanager = NewManager() # CUSTOM MANAGER

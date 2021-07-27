@@ -192,21 +192,14 @@
                 {% include 'includes/socials.html' %}
             </div>
             <div class="col-12 post-content p-0">
-                <p>{{post.content|linebreaks}}</p>
+                <p>{{post.content|safe}}</p>
             </div>
             <hr class="my-5">
         </div>
 
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content p-5">
-
-                </div>
-            </div>
-        </div>
+  
 
         <!-- Comments -->
         <div class="comments-section mt-5">
@@ -273,17 +266,6 @@
             </div>
         </div>
 
-        <div id="25" class="my-2 p-2 redborder" style="border: 0px solid grey">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <img class="avatar_single mr-3" src="{{ node.author.profile.avatar.url }}">
-                    By {{ node.author }}
-                </div>
-                <small>{{ node.publish }}</small>
-            </div>
-            <div class="node-content">{{ node.content }}</div>
-            <hr>
-        </div>
 
         <script>
             // Comments
