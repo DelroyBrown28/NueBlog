@@ -12,6 +12,14 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         "slug" : ("title",),
     }
+    readonly_fields = (
+        'favorites',
+        'likes',
+        'thumbsup',
+        'thumbsdown',
+        'thumbs',
+        'published',
+        )
     # formfield_overrides = {
     # models.Post.content: {'widget': TinyMCE()}
     # }

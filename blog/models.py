@@ -38,7 +38,7 @@ class Post(models.Model):
         ('published', 'Published'),
     }
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique_for_date='publish', help_text='URL deirecting to this post')
+    slug = models.SlugField(max_length=250, unique_for_date='published', help_text='URL deirecting to this post')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=1)
     excerpt = models.TextField(null=True)
     image = models.ImageField(upload_to='posts/%Y/%m/%d/', default='posts/default.jpg')
@@ -48,19 +48,16 @@ class Post(models.Model):
     status = models.CharField(max_length=10, choices=OPTIONS, default='published')
     favorites = models.ManyToManyField(User, related_name='favorite', default=None, blank=True)
     likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
-    like_count = models.BigIntegerField(default='0')
     thumbsup = models.IntegerField(default='0')
     thumbsdown = models.IntegerField(default='0')
     thumbs = models.ManyToManyField(User, related_name='thumbs', default=None, blank=True)
     add_to_carousel = models.BooleanField(default=False)
-    publish = models.DateTimeField(default=timezone.now)
+    published = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER
     newmanager = NewManager() # CUSTOM MANAGER
     
     
-    def get_likes(self):
-        return ", ".join([str(p) for p in self.likes.all()])
-
+ 
     def __unicode__(self):
         return "{0}".format(self.title)
     
@@ -81,7 +78,7 @@ class Post(models.Model):
     
     
     class Meta:
-        ordering = ('-publish', )
+        ordering = ('-published', )
     
     def __str__(self):
         return self.title
