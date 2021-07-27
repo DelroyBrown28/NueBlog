@@ -1,35 +1,35 @@
-{% extends "base/base.html" %}
-
-{% block title %}
-Category List
-{% endblock %}
-
+{% extends 'base/base.html' %}
+{% load static  %}
 {% block content %}
+<br>
+{% if sub_categories %}
+<h3>Sub Categories</h3>
+{% for i in sub_categories %}
+<a href="{{ i.slug }}"> {{ i.name }} </a>
+{% endfor %}
+{% endif %}
 
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 pb-5">
-                <h1> List of #{{categorylist.cat}} posts</h1>
-            </div>
-            {% for post in categorylist.posts %}
-            <div class="col-md-4">
-                <a class="text-dark" href="{{post.get_absolute_url}}">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}">
-                        <div class="card-body">
-                            <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
-                            <p class="card-text">{{post.excerpt|truncatechars:50}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
+<div class="row small-up-1 medium-up-3">
+    {% if post_set %}
+    {% for i in post_set %}
+    <div class="columns">
+        <div class=" card-article-hover card">
+            <a href="{{ i.slug }}">
+                <img src="{{ i.cover_photo.url }}">
+            </a>
+            <div class="card-section">
+                <a href="{{ i.slug }}">
+                    <h6 class="article-title">{{ i.title | truncatechars:30}}</h6>
                 </a>
             </div>
-            {% endfor %}
+            <div class="card-divider flex-container align-middle">
+                <a href="" class="author">{{ i.user.get_full_name }}</a>
+            </div>
+            <div class="hover-border">
+            </div>
         </div>
     </div>
+    {% endfor %}
+    {% endif %}
 </div>
-
 {% endblock %}

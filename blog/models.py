@@ -17,12 +17,14 @@ def user_directory_path(instance, filename):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField()
     
     class Meta:
         verbose_name_plural = 'Categories'
     
     def __str__(self):
         return self.name
+        
     
 
 class Post(models.Model):
@@ -36,11 +38,11 @@ class Post(models.Model):
         ('published', 'Published'),
     }
     title = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date='publish', help_text='URL deirecting to this post')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=1)
     excerpt = models.TextField(null=True)
     image = models.ImageField(upload_to='posts/%Y/%m/%d/', default='posts/default.jpg')
     # image_caption = models.CharField(max_length=100, default='Image caption.')
-    slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     content = RichTextField()
     status = models.CharField(max_length=10, choices=OPTIONS, default='published')
@@ -65,6 +67,17 @@ class Post(models.Model):
   
     def get_absolute_url(self):
         return reverse("blog:post_single", args=[self.slug])
+    
+    def get_cat_list(self):
+        k = self.category # for now ignore this instance method
+        
+        breadcrumb = ["dummy"]
+        while k is not None:
+            breadcrumb.append(k.slug)
+            k = k.parent
+        for i in range(len(breadcrumb)-1):
+            breadcrumb[i] = '/'.join(breadcrumb[-1:i-1:-1])
+        return breadcrumb[-1:0:-1]
     
     
     class Meta:

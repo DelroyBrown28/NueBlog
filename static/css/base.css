@@ -427,6 +427,11 @@ BUTTONS
 
 }
 
+.card-title {
+    font-size: 18px;
+    font-weight: bold
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow:
@@ -635,11 +640,7 @@ BUTTONS
     color: #48AA8B;
 }
 
-.carousel
-
-
-
-.carousel-control-prev span,
+.carousel .carousel-control-prev span,
 .carousel-control-next span {
     width: 30px;
 }
@@ -693,6 +694,15 @@ POST DISPLAY PAGE
     margin-top: 65px;
 }
 
+.post-content a {
+    text-decoration: none;
+    color: #48AA8B;
+    transition: 0.3s ease-in-out;
+}
+
+.post-content a:hover {
+    opacity: 0.5;
+}
 
 
 /* COMMENT BOX */

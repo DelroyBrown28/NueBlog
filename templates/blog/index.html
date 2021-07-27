@@ -17,11 +17,11 @@ Nue Blog
             {% for post in posts  %}
             {% if post.add_to_carousel == True %}
             {% if forloop.first %}
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter }}"
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
                 class="active" aria-current="true" aria-label="Slide {{ forloop.counter }}">
             </button>
             {% else %}
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter }}"
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter0}}"
                 aria-label="Slide {{ forloop.counter }}">
             </button>
             {% endif %}
@@ -32,8 +32,7 @@ Nue Blog
         <div class="carousel-inner">
             {% for post in posts  %}
             {% if post.add_to_carousel == True %}
-            {% if forloop.first %}
-            <a href="{{post.get_absolute_url}}" class="carousel-item active" data-bs-interval="10000">
+            <a href="{{post.get_absolute_url}}" class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-bs-interval="10000">
                 <img src="{{ post.image.url }}" class="d-block w-100 carousel-image" alt="...">
                 <div class="carousel-caption-wrap">
                     <div class="carousel-caption d-none d-md-block">
@@ -43,18 +42,6 @@ Nue Blog
                     </div>
                 </div>
             </a>
-            {% else %}
-            <a href="{{post.get_absolute_url}}" class="carousel-item" data-bs-interval="10000">
-                <img src="{{ post.image.url }}" class="d-block w-100 carousel-image" alt="...">
-                <div class="carousel-caption-wrap">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{post.title}}</h5>
-                        <p>{{post.excerpt}}.</p>
-                        <small>By: {{post.author}}</small>
-                    </div>
-                </div>
-            </a>
-            {% endif %}
             {% endif %}
             {% endfor %}
 
@@ -78,6 +65,7 @@ Nue Blog
 <div class="album py-5 bg-light">
     <div class="container mb-5 bg-light col-md-12 flexed category-bar">
         {% for category in category_list  %}
+        
         <div>
             {{category.name|title}}
         </div>
@@ -94,7 +82,7 @@ Nue Blog
                     <div class="card mb-5">
                         <img class="card-img-top post-image" src="{{ post.image.url }}" alt="{{ post.title }}">
                         <div class="card-body">
-                            <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
+                            <h2 class="card-title" >{{post.title|truncatechars:50}}</h2>
                             <p class="card-text" style="height: 65px;">{{post.excerpt|truncatechars:50}}</p>
 
                         </div>

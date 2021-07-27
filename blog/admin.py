@@ -12,16 +12,20 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         "slug" : ("title",),
     }
-    formfield_overrides = {
-
-    models.Post.content: {'widget': TinyMCE()}}
+    # formfield_overrides = {
+    # models.Post.content: {'widget': TinyMCE()}
+    # }
  
 @admin.register(models.Vote)    
 class VoteAdmin(admin.ModelAdmin):
     list_display = ('user', 'post', 'vote')
     # list_editable = ()
     
-
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {
+        "slug" : ("name",),
+    }
     
-admin.site.register(models.Category)
+    
 admin.site.register(models.Comment, MPTTModelAdmin)
