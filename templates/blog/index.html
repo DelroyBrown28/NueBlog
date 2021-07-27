@@ -10,15 +10,49 @@ Nue Blog
 {% block content %}
 
 
-<!-- FEATURED SECTION -->
+
+{% for jort in global_styles  %}
+
+{% if jort.show_tiles == True %}
+<!-- FEATURED SECTION -- TILES -->
+<div class="container my-5 feature-container flexed">
+    {% for post in posts  %}
+    <a href="{{post.get_absolute_url}}" class="main-feature-card bg-dark text-white">
+        <img class="card-img feature-card-img" src="{{ post.image.url }}" alt="{{ post.title }}">
+        <div class="card-img-overlay">
+            <h5 class="card-title featured-card-title m-0">{{post.title}}</h5>
+            <p class="card-text featured-card-text m-0">{{post.excerpt}}.</p>
+            <div class="showthis my-2">
+                By: {{post.author}}
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+    {% for post in posts  %}
+    <a href="{{post.get_absolute_url}}" class="main-feature-card-2 bg-dark text-white">
+        <img class="card-img feature-card-img" style="height: auto;" src="{{ post.image.url }}" alt="{{ post.title }}">
+        <div class="card-img-overlay">
+            <h5 class="card-title featured-card-title m-0">{{post.title}}</h5>
+            <p class="card-text featured-card-text m-0"><em>{{post.excerpt}}.</em></p>
+            <div class="showthis my-2">
+                By: {{post.author}}
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+
+<!-- FEATURED SECTION -- Jumbotron -->
 <div class="container">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             {% for post in posts  %}
             {% if post.add_to_carousel == True %}
             {% if forloop.first %}
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                class="active" aria-current="true" aria-label="Slide {{ forloop.counter }}">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide {{ forloop.counter }}">
             </button>
             {% else %}
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter0}}"
@@ -32,7 +66,8 @@ Nue Blog
         <div class="carousel-inner">
             {% for post in posts  %}
             {% if post.add_to_carousel == True %}
-            <a href="{{post.get_absolute_url}}" class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-bs-interval="10000">
+            <a href="{{post.get_absolute_url}}" class="carousel-item {% if forloop.counter == 1 %}active{% endif %}"
+                data-bs-interval="10000">
                 <img src="{{ post.image.url }}" class="d-block w-100 carousel-image" alt="...">
                 <div class="carousel-caption-wrap">
                     <div class="carousel-caption d-none d-md-block">
@@ -57,6 +92,14 @@ Nue Blog
     </div>
 </div>
 
+{% endif %}
+
+{% endfor %}
+
+
+
+
+
 <!-- CATEGORIES -->
 
 
@@ -65,7 +108,7 @@ Nue Blog
 <div class="album py-5 bg-light">
     <div class="container mb-5 bg-light col-md-12 flexed category-bar">
         {% for category in category_list  %}
-        
+
         <div>
             {{category.name|title}}
         </div>
@@ -82,7 +125,7 @@ Nue Blog
                     <div class="card mb-5">
                         <img class="card-img-top post-image" src="{{ post.image.url }}" alt="{{ post.title }}">
                         <div class="card-body">
-                            <h2 class="card-title" >{{post.title|truncatechars:50}}</h2>
+                            <h2 class="card-title">{{post.title|truncatechars:50}}</h2>
                             <p class="card-text" style="height: 65px;">{{post.excerpt|truncatechars:50}}</p>
 
                         </div>

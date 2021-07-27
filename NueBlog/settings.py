@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     # MY STUFF
     'blog',
     'accounts',
+    'page_customisations',
+    'context_processors',
     'mptt',
     'admin_honeypot',
 ]
@@ -73,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'context_processors.context_processors.global_styles_processor',
                 'blog.views.category_list',
                 'accounts.views.avatar',
             ],

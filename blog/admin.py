@@ -1,9 +1,25 @@
 from django.contrib import admin
 from . import models
+from page_customisations.models import GlobalSiteStyling
 from .models import Post, Comment
 from mptt.admin import MPTTModelAdmin
 from tinymce.widgets import TinyMCE
 
+
+
+class JumbotronTiles(admin.ModelAdmin):
+    list_display = (
+        'styling_name',
+        'show_tiles',
+        'show_jumbotron',
+    )
+    list_display_links = (
+        'styling_name',
+    ) 
+    list_editable = (
+        'show_tiles',
+        'show_jumbotron',
+    )
 
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
@@ -37,3 +53,4 @@ class CategoryAdmin(admin.ModelAdmin):
     
     
 admin.site.register(models.Comment, MPTTModelAdmin)
+admin.site.register(GlobalSiteStyling, JumbotronTiles)
