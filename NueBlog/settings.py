@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,17 +95,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default' : {
-#         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-#         'NAME' : 'NueBlog',
-#         'USER' : 'postgres',
-#         'PASSWORD' : 'william17',
-#         'HOST' : 'localhost',
-#         'PORT' : '5433',
-        
-#     }
-# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
