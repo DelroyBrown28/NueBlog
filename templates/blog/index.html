@@ -11,39 +11,6 @@ Nue Blog
 
 
 
-{% for jort in global_styles  %}
-
-{% if jort.show_tiles == True %}
-<!-- FEATURED SECTION -- TILES -->
-<div class="container my-5 feature-container flexed">
-    {% for post in posts  %}
-    <a href="{{post.get_absolute_url}}" class="main-feature-card bg-dark text-white">
-        <img class="card-img feature-card-img" src="{{ post.image.url }}" alt="{{ post.title }}">
-        <div class="card-img-overlay">
-            <h5 class="card-title featured-card-title m-0">{{post.title}}</h5>
-            <p class="card-text featured-card-text m-0">{{post.excerpt}}.</p>
-            <div class="showthis my-2">
-                By: {{post.author}}
-            </div>
-        </div>
-    </a>
-    {% endfor %}
-
-    {% for post in posts  %}
-    <a href="{{post.get_absolute_url}}" class="main-feature-card-2 bg-dark text-white">
-        <img class="card-img feature-card-img" style="height: auto;" src="{{ post.image.url }}" alt="{{ post.title }}">
-        <div class="card-img-overlay">
-            <h5 class="card-title featured-card-title m-0">{{post.title}}</h5>
-            <p class="card-text featured-card-text m-0"><em>{{post.excerpt}}.</em></p>
-            <div class="showthis my-2">
-                By: {{post.author}}
-            </div>
-        </div>
-    </a>
-    {% endfor %}
-</div>
-{% else %}
-
 <!-- FEATURED SECTION -- Jumbotron -->
 <div class="container">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -91,13 +58,6 @@ Nue Blog
         </button>
     </div>
 </div>
-
-{% endif %}
-
-{% endfor %}
-
-
-
 
 
 <!-- CATEGORIES -->
