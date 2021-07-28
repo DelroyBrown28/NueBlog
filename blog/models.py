@@ -51,7 +51,8 @@ class Post(models.Model):
     thumbsup = models.IntegerField(default='0')
     thumbsdown = models.IntegerField(default='0')
     thumbs = models.ManyToManyField(User, related_name='thumbs', default=None, blank=True)
-    add_to_carousel = models.BooleanField(default=False)
+    add_to_carousel = models.BooleanField(default=False,
+                                          help_text='Check this box to add this post to the homepage carousel. Carousel will only hold 5 slides.')
     published = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER
     newmanager = NewManager() # CUSTOM MANAGER
@@ -111,5 +112,4 @@ class Vote(models.Model):
     
     def __str__(self):
         return f"Vote from {self.user} on post {self.post}"
-    
     

@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+
+{% block branding %}
+<img class="" style="height: 77px;" src="{% static 'images/nueuiwhite.png' %}" alt="" />
+<br>
+<br>
+<hr>
+<small class="business-tag">{{request.user}}</small><br>
+<a href="/admin" style="color: #48AA8B;">Admin</a>
+<hr>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
