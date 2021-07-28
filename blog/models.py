@@ -2,6 +2,8 @@ import uuid
 from django.db import models
 from django import forms
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib import messages
@@ -51,8 +53,10 @@ class Post(models.Model):
     thumbsup = models.IntegerField(default='0')
     thumbsdown = models.IntegerField(default='0')
     thumbs = models.ManyToManyField(User, related_name='thumbs', default=None, blank=True)
-    add_to_carousel = models.BooleanField(default=False,
-                                          help_text='Check this box to add this post to the homepage carousel. Carousel will only hold 5 slides.')
+    add_to_carousel = models.BooleanField(default=False, help_text = mark_safe(_(
+            '<small style="color: #222222; font-weight: 300; font-size: 13px;">Check this box to add this post to the carousel. <span style="color: red">Carousel will only hold 5 slides</span></small>'
+        ))
+    )
     published = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER
     newmanager = NewManager() # CUSTOM MANAGER
