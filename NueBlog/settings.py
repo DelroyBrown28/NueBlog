@@ -1,13 +1,16 @@
 import os
 import dj_database_url
+import environ
 from pathlib import Path
+
+env = environ.Env()
+environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = env('SECRET_KEY')
 
-SECRET_KEY = 'django-insecure-n2&z(ubyop1&ai7f89x13obmg)50!vuvp!e(*_8s_s@2nyj1@*'
-
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = ['nueblog.herokuapp.com', 'localhost', '*']
 
