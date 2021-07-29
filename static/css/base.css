@@ -36,6 +36,7 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
+
 @media (min-width: 1200px) {
 
     .container {
@@ -739,6 +740,8 @@ POST DISPLAY PAGE
     color: #FFF;
 
 }
+
+
 
 .saved-post-view-btn:hover {
     color: #48AA8B !important;

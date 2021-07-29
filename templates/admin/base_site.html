@@ -3,12 +3,18 @@
 
 
 {% block branding %}
+<style>
+    .business-tag {
+        text-transform: uppercase !important;
+        color: #fff !important;
+    }
+</style>
 <img class="" style="height: 77px;" src="{% static 'images/nueuiwhite.png' %}" alt="" />
 <br>
 <br>
 <hr>
 <small class="business-tag">{{request.user}}</small><br>
-<a href="/admin" style="color: #48AA8B;">Admin</a>
+<small style="color: #48AA8B;">Admin</small>
 <hr>
 {% endblock %}
 
