@@ -729,6 +729,29 @@ POST DISPLAY PAGE
     border: 2px solid red !important;
 }
 
+.comment-reply-btn,
+.comment-delete-btn {
+    display: inline-block;
+    background-color: transparent;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #48AA8B;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.comment-delete-btn {
+    color: red !important;
+}
+
 .push-comment-btn {
     background-color: transparent;
     color: #25D366;

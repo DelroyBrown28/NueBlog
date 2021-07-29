@@ -210,11 +210,13 @@
                     <div class="node-content">{{ node.content }}</div>
 
                     <div class="d-flex flex-row-reverse">
-                        <button class="btn btn-primary btn-sm" onclick="myFunction({{ node.id }})">Reply</button>
                         {% if node.author|stringformat:"s" == user.get_username  %}
-                        <button class="btn btn-secondary btn-sm mr-2"
-                            onclick="deleteComment({{ node.id }})">Delete</button>
+                        <button class="comment-delete-btn mr-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Comment"
+                            onclick="deleteComment({{ node.id }})"><i class="fas fa-trash-alt mr-2"></i>
+                        </button>
                         {% endif %}
+                        <button class="comment-reply-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Reply To Comment" onclick="myFunction({{ node.id }})"><i class="fas fa-reply mr-2"></i>
+                        </button>
                     </div>
                     <hr />
                 </div>
