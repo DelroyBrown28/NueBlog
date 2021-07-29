@@ -516,24 +516,14 @@ BUTTONS
     background: linear-gradient(183deg, rgba(72, 170, 139, 1) 0%, rgba(72, 170, 139, 0.4822303921568627) 35%, rgba(72, 170, 139, 0.09287464985994398) 100%);
 }
 
-
-
-
-
 .showthis {
     color: #000;
     /* opacity: 0; */
     transition: 0.3s;
     transition-delay: 0.3s;
 
-
 }
 
-/* 
-
-.main-feature-card:hover>.card-img-overlay {
-    opacity: 1;
-} */
 
 .main-feature-card-2:hover>.card-img-overlay {
     opacity: 1;
@@ -740,6 +730,18 @@ POST DISPLAY PAGE
 
 .myForm p input {
     border: none !important;
+}
+
+.saved-post-view-btn {
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #333;
+    color: #FFF;
+
+}
+
+.saved-post-view-btn:hover {
+    color: #48AA8B !important;
 }
 
 

@@ -31,8 +31,8 @@
     <div>
         <div class="row">
             {% for post in new %}
-            <div class="col-md-3">
-                <a class="text-dark"  href="{{post.get_absolute_url}}">
+            <div class="col-md-3 flexed">
+                <a class="text-dark" href="{{post.get_absolute_url}}">
                     <div class="card mb-5">
                         <div class="remove-section">
                             <a href="{% url 'accounts:favorites_add' post.id %}"
@@ -42,14 +42,14 @@
                         </div>
                         <img class="card-img-top post-image" src="{{ post.image.url }}" alt="{{ post.title }}">
                         <div class="card-body">
-                            <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
+                            <h2 class="card-title">{{post.title|truncatechars:50}}</h2>
                             <p class="card-text" style="height: 65px;">{{post.excerpt|truncatechars:50}}</p>
 
                         </div>
+                        <a class="saved-post-view-btn" href="{{post.get_absolute_url}}">view</a>
                         <div class="d-flex py-1 justify-content-between align-items-right">
-                            <small class="text-muted post-published-date">{{post.published}}</small>
-                            <small class="text-muted post-author">{{post.author}}</small>
-
+                            <small class="post-published-date">{{post.published}}</small>
+                            <small class="post-author">{{post.author}}</small>
                         </div>
                     </div>
                 </a>
