@@ -61,8 +61,8 @@ class Post(models.Model):
     thumbsup = models.IntegerField(default='0')
     thumbsdown = models.IntegerField(default='0')
     thumbs = models.ManyToManyField(User, related_name='thumbs', default=None, blank=True)
-    add_to_carousel = models.CharField(max_length=20, choices=ADD_TO_CAROUSEL, default='add_to_carousel', help_text = mark_safe(_(
-            '<small style="color: #222222; opacity: 0.5; font-weight: 300; font-size: 13px;">Uncheck this box to remove this post from the carousel. <span style="color: red">Carousel will only hold 5 slides</span></small>'
+    add_to_carousel = models.CharField(max_length=20, choices=ADD_TO_CAROUSEL, default='remove_from_carousel', help_text = mark_safe(_(
+            '<small style="color: red; opacity: 0.5; font-weight: 300; font-size: 13px;">Carousel limited to 5 posts.</small>'
         ))
     )
     published = models.DateTimeField(default=timezone.now)
