@@ -25,7 +25,6 @@
     {% for data in avatar %}
     {{ data.avatar.url }}
     {% endfor %}">
-    
     <ul class="navbar-nav">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
@@ -38,6 +37,12 @@
                 <a class="dropdown-item" href="{% url 'accounts:favorites_list' %}">Saved Posts</a>
                 <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                {% if request.user.is_superuser %}
+                <a href="/blogadmin" class="dropdown-item">
+                    <img src="{% static 'images/superadminicon.png' %}" style="height: 16px !important;">
+                    Blog Admin</a>
+                {% endif %}
+
             </div>
         </li>
     </ul>
