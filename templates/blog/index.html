@@ -15,8 +15,7 @@ Nue Blog
 <div class="container">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            {% for post in posts|slice:":5"  %}
-            {% if post.add_to_carousel == True %}
+            {% for ci in carousel_imgs|slice:":5"  %}
             {% if forloop.first %}
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide {{ forloop.counter }}">
@@ -26,28 +25,25 @@ Nue Blog
                 aria-label="Slide {{ forloop.counter }}">
             </button>
             {% endif %}
-            {% endif %}
             {% endfor %}
         </div>
 
         <div class="carousel-inner">
-            {% for post in posts|slice:":5"  %}
-            {% if post.add_to_carousel == True %}
-            <a href="{{post.get_absolute_url}}" class="carousel-item {% if forloop.counter == 1 %}active{% endif %}"
+            {% for ci in carousel_imgs|slice:":5"  %}
+            <a href="{{ci.get_absolute_url}}" class="carousel-item {% if forloop.counter == 1 %}active{% endif %}"
                 data-bs-interval="10000">
-                <img src="{{ post.image.url }}" class="d-block w-100 carousel-image" alt="...">
+                <img src="{{ ci.image.url }}" class="d-block w-100 carousel-image" alt="...">
                 <div class="carousel-caption-wrap">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>{{post.title}}</h5>
-                        <p>{{post.excerpt}}.</p>
-                        <small>By: {{post.author}}</small>
+                        <h5>{{ci.title}}</h5>
+                        <p>{{ci.excerpt}}.</p>
+                        <small>By: {{ci.author}}</small>
                     </div>
                 </div>
             </a>
-            {% endif %}
             {% endfor %}
-
         </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
             <span>°</span>
             <span class="visually-hidden">Previous</span>

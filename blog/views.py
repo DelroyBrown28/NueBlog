@@ -10,10 +10,10 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 
 def home(request):
-    
     all_posts = Post.newmanager.all()
-    
-    return render(request, 'blog/index.html', {'posts' : all_posts})
+    carousel_posts = Post.carouselmanager.all()
+    return render(request, 'blog/index.html', {'posts' : all_posts, 'carousel_imgs' : carousel_posts})
+
 
 def post_single(request, post):
     post = get_object_or_404(Post, slug=post, status='published')

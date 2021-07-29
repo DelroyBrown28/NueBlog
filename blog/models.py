@@ -34,10 +34,18 @@ class Post(models.Model):
     class NewManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().filter(status='published')
+        
+    class CarouselManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(add_to_carousel='add_to_carousel')
     
     OPTIONS = {
         ('draft', 'Draft'),
         ('published', 'Published'),
+    }
+    ADD_TO_CAROUSEL = {
+        ('add_to_carousel', 'Yes'),
+        ('remove_from_carousel', 'No'),
     }
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='published', help_text='URL deirecting to this post')
@@ -53,16 +61,16 @@ class Post(models.Model):
     thumbsup = models.IntegerField(default='0')
     thumbsdown = models.IntegerField(default='0')
     thumbs = models.ManyToManyField(User, related_name='thumbs', default=None, blank=True)
-    add_to_carousel = models.BooleanField(default=False, help_text = mark_safe(_(
-            '<small style="color: #222222; font-weight: 300; font-size: 13px;">Check this box to add this post to the carousel. <span style="color: red">Carousel will only hold 5 slides</span></small>'
+    add_to_carousel = models.CharField(max_length=20, choices=ADD_TO_CAROUSEL, default='add_to_carousel', help_text = mark_safe(_(
+            '<small style="color: #222222; opacity: 0.5; font-weight: 300; font-size: 13px;">Uncheck this box to remove this post from the carousel. <span style="color: red">Carousel will only hold 5 slides</span></small>'
         ))
     )
     published = models.DateTimeField(default=timezone.now)
     objects = models.Manager() # DEFAULT MANAGER
     newmanager = NewManager() # CUSTOM MANAGER
+    carouselmanager = CarouselManager()
     
-    
- 
+  
     def __unicode__(self):
         return "{0}".format(self.title)
     
@@ -116,4 +124,3 @@ class Vote(models.Model):
     
     def __str__(self):
         return f"Vote from {self.user} on post {self.post}"
-    
