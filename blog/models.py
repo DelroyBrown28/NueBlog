@@ -78,20 +78,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("blog:post_single", args=[self.slug])
     
-    def get_cat_list(self):
-        k = self.category # for now ignore this instance method
-        
-        breadcrumb = ["dummy"]
-        while k is not None:
-            breadcrumb.append(k.slug)
-            k = k.parent
-        for i in range(len(breadcrumb)-1):
-            breadcrumb[i] = '/'.join(breadcrumb[-1:i-1:-1])
-        return breadcrumb[-1:0:-1]
-    
+   
     
     class Meta:
-        ordering = ('-published', )
+        ordering = ('-published', '-add_to_carousel')
     
     def __str__(self):
         return self.title
