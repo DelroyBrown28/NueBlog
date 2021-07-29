@@ -729,6 +729,12 @@ POST DISPLAY PAGE
     border: 2px solid red !important;
 }
 
+.push-comment-btn {
+    background-color: transparent;
+    color: #25D366;
+    font-weight: 400;
+}
+
 .myForm p input {
     border: none !important;
 }

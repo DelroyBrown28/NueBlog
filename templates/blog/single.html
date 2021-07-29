@@ -278,16 +278,17 @@
                         console.log(json)
 
 
-                        $('<div id="" class="my-2 p-2 redborder" style="border: 0px solid grey"> \
-                            <div class="d-flex justify-content-between"> \
-                                <div> \
-                                    <img class="avatar_single mr-3" src="'+ json["avatar"] +'"> \
-                                    By '+ json["user"] +' \
+                        $('<div id="" class="my-5 p-2 redborder" style="border: 0px solid grey"> \
+                            <div class="d-flex justify-content-center"> \
+                                <div style="text-transform: uppercase;" class="my-5"> \
+                                    <span style="color: #48AA8B;">'+ json["user"] +'</span> says: \
                                 </div> \
-                                <small>'+ json["publish"] +'</small> \
                             </div> \
-                            <div class="node-content">'+ json['result'] +'</div> \
-                            <hr> \
+                            <div class="mb-5 d-flex justify-content-center">'+ json['result'] +'</div> \
+                            <div class="d-flex justify-content-center"> \
+                                <br> \
+                                <button class="push-comment-btn w-100" onClick="window.location.reload();"><i class="fas fa-arrow-up"></i><br><br>PUSH COMMENT</button> \
+                            </div> \
                         </div>').insertBefore('#' + placement);
 
                         $('.commentform').trigger("reset");
