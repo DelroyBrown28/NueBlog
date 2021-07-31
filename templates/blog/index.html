@@ -10,7 +10,6 @@ Nue Blog
 {% block content %}
 
 
-
 <!-- FEATURED SECTION -- Jumbotron -->
 <div class="container">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -85,7 +84,7 @@ Nue Blog
                             <p class="card-text" style="height: 65px;">{{post.excerpt|truncatechars:50}}</p>
 
                         </div>
-                        <div class="d-flex py-1 justify-content-between align-items-right">
+                        <div class="post-card-bottom d-flex py-1 justify-content-between align-items-right">
                             <small class="post-published-date">{{post.published}}</small>
                             <small class="post-author">{{post.author}}</small>
 
@@ -100,5 +99,46 @@ Nue Blog
     </div>
 </div>
 <!-- POSTS -->
+
+
+<script>
+    $(document).on('keyup', '#id_q', function (e) {
+        e.preventDefault();
+
+        var minlength = 2;
+        var results = [];
+
+        if ($('#id_q').val().length >= minlength) {
+            $.ajax({
+                type: 'POST',
+                url: '{% url "blog:post_search" %}',
+                data: {
+                    ss: $('#id_q').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+                success: function (json) {
+
+                    $.each(JSON.parse(json.search_string), function (i, item) {
+
+                        results.push('<li class="my-2 pl-2"><a href="/' + item
+                            .fields.slug +
+                            '">' + item.fields.title +
+                            '</a></li>')
+                    })
+
+                    if (!$(".show")[0]) {
+                        $('.menudd').trigger('click')
+                    }
+
+                    document.getElementById("list").innerHTML = (!results.length) ?
+                        "No results match your query" : results.join('');
+                },
+                error: function (xhr, errmsg, err) {}
+            });
+        }
+    })
+</script>
+
 
 {% endblock content %}

@@ -102,6 +102,12 @@ NAVBAR
 ======
 */
 
+.nav-wrap {
+    background-color: #333 !important;
+
+
+}
+
 .navbar {
     position: relative;
     display: flex;
@@ -110,6 +116,18 @@ NAVBAR
     justify-content: space-between;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+}
+
+.navlinks {
+    color: #FFF;
+    transition: 0.3s ease-in-out;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.navlinks:hover {
+    color: #48AA8B;
+    letter-spacing: 3px;
 }
 
 .navbar-toggler {
@@ -254,6 +272,11 @@ BUTTONS
 .card-img-top {
     height: 180px;
     border-radius: 0px;
+}
+
+.post-card-bottom {
+    background-color: #333;
+    color: #FFF;
 }
 
 
@@ -541,18 +564,15 @@ BUTTONS
 }
 
 
-.post-published-date {
-    padding-left: 16px;
-    color: #000;
-}
-
 #id_title {
     text-transform: capitalize;
 }
 
-.post-author {
-    padding-right: 16px;
-    color: #000;
+.post-author,
+.post-published-date {
+    padding: 0px 16px;
+    color: #FFF;
+    
 }
 
 .view-post-arrow {

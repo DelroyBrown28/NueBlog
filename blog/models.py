@@ -28,7 +28,6 @@ class Category(models.Model):
         return self.name
         
     
-
 class Post(models.Model):
     
     class NewManager(models.Manager):
@@ -102,9 +101,7 @@ class Comment(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['-publish']
         
-    
-    
-    
+        
 class Vote(models.Model):
     post = models.ForeignKey(Post, related_name='postid',
                              on_delete=models.CASCADE, default=None, blank=True)
