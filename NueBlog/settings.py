@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'page_customisations',
     'context_processors',
     'mptt',
-    'admin_honeypot',
     'storages',
 ]
 

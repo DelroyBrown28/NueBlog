@@ -101,6 +101,9 @@ class Comment(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['-publish']
         
+    def __str__(self):
+        return f'Comment by "{self.author}" on post "{self.post}"'
+        
         
 class Vote(models.Model):
     post = models.ForeignKey(Post, related_name='postid',
@@ -111,3 +114,5 @@ class Vote(models.Model):
     
     def __str__(self):
         return f"Vote from {self.user} on post {self.post}"
+    
+    

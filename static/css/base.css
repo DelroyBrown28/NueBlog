@@ -152,14 +152,14 @@ NAVBAR
 .nav-link {
     display: block;
     padding: 0.5rem 1rem;
-    color: #000;
+    color: #FFF !important;
     text-decoration: none;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
 .nav-link:hover,
 .nav-link:focus {
-    color: #48AA8B;
+    color: #48AA8B !important;
 }
 
 .navbar-logo {
